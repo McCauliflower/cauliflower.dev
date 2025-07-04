@@ -1,0 +1,32 @@
+html, body {
+    height: 100%;
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    padding-top: 50px;
+    overflow: hidden;
+    font-family: Arial, sans-serif;
+    height: 100%;
+}
+
+canvas {
+    display: block;
+}
+
+h1 {
+    position: absolute;
+    top: 20px;
+    left: 20px;
+    color: white;
+    z-index: 1;
+}
+
+.container {
+    margin-top: 0; /* Remove extra margin, handled by body padding */
+    position: relative;
+    width: 90%;
+    height: calc(100vh - 60px); /* Use available height below nav */
+}

@@ -1,0 +1,51 @@
+<script type="module">
+  class NavMenu extends HTMLElement {
+    constructor() {
+      super();
+      this.attachShadow({ mode: 'open' });
+      this.shadowRoot.innerHTML = `
+        <style>
+          /* Your CSS goes here (scoped in shadow DOM) */
+          #cssmenu {
+            position: fixed;
+            top: 0;
+            left: calc(50% - 120px);
+            width: 240px;
+            background: white;
+            z-index: 99;
+          }
+          #cssmenu ul {
+            list-style: none;
+            margin: 0;
+            padding: 0;
+            display: flex;
+            justify-content: center;
+          }
+          #cssmenu li {
+            margin: 0 10px;
+          }
+          #cssmenu a {
+            text-decoration: none;
+            padding: 10px 20px;
+            color: #8C8479;
+            text-transform: uppercase;
+            font-weight: bold;
+          }
+          #cssmenu a:hover {
+            background: #d6d6d6;
+          }
+        </style>
+        <header>
+          <nav id="cssmenu">
+            <ul>
+              <li><a href="/art" id="one">Art</a></li>
+              <li><a href="/code" id="two">Code</a></li>
+            </ul>
+          </nav>
+        </header>
+      `;
+    }
+  }
+
+  customElements.define('nav-menu', NavMenu);
+</script>

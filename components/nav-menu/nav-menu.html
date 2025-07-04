@@ -1,0 +1,69 @@
+<!-- nav-menu.html -->
+<template>
+  <header>
+    <nav id="cssmenu">
+      <ul>
+        <li><a href="/art" id="one">Art</a></li>
+        <li><a href="/code" id="two">Code</a></li>
+      </ul>
+    </nav>
+  </header>
+  <style>
+    nav#cssmenu {
+        position: fixed;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 60px;
+        background: white;
+        z-index: 2;
+        display: flex;
+        align-items: center;
+        box-shadow: 0 2px 8px rgba(0,0,0,0.05);
+        color: black
+    }
+    #cssmenu ul {
+        list-style: none;
+        margin: 0;
+        padding: 0;
+        display: flex;
+        justify-content: center;
+    }
+    #cssmenu li {
+        margin: 0 10px;
+    }
+    #cssmenu a {
+        text-decoration: none;
+        padding: 10px 20px;
+        color: #8C8479;
+        text-transform: uppercase;
+        font-weight: bold;
+    }
+    #cssmenu a:hover {
+        background: #d6d6d6;
+    }
+    a {
+      text-decoration: none;
+      color: #8C8479;
+      text-transform: uppercase;
+      padding: 10px 20px;
+      display: inline-block;
+      line-height: 40px;
+      font-size: 1.1em;
+    }
+    a:hover {
+      background: #d6d6d6;
+    }
+    ul {
+      list-style: none;
+      display: flex;
+      justify-content: center;
+      padding: 0;
+      margin: 0;
+      width: 100%;
+    }
+    li {
+      margin: 0 10px;
+    }
+  </style>
+</template>
