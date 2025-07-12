@@ -11,6 +11,9 @@ class NavMenu extends HTMLElement {
 
     const template = templateWrapper.querySelector('template');
       this.shadowRoot.appendChild(template.content.cloneNode(true));
+
+      console.log('templateWrapper', templateWrapper);
+      console.log('template', template);
   }
 
   connectedCallback() {

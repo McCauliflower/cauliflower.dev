@@ -7,7 +7,11 @@ export default defineConfig({
     emptyOutDir: true,
   },
   server: {
-    port: 5173,
+    port: 8000,
     open: true,
+    watch: {
+      usePolling: true,
+      interval: 100,
+    },
   },
 });

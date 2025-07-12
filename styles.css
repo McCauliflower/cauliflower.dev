@@ -1,3 +1,11 @@
+/* Import Iceberg font */
+@font-face {
+    font-family: 'Iceberg';
+    src: url('./Iceberg-Regular.ttf') format('truetype');
+    font-weight: normal;
+    font-style: normal;
+}
+
 html, body {
     height: 100%;
     margin: 0;
@@ -8,7 +16,7 @@ html, body {
 body {
     padding-top: 50px;
     overflow: hidden;
-    font-family: Arial, sans-serif;
+    font-family: 'Iceberg', Arial, sans-serif;
     height: 100%;
 }
 
@@ -25,8 +33,8 @@ h1 {
 }
 
 .container {
-    margin-top: 0; /* Remove extra margin, handled by body padding */
+    margin-top: 0;
     position: relative;
     width: 90%;
-    height: calc(100vh - 60px); /* Use available height below nav */
+    height: calc(100vh - 60px);
 }
