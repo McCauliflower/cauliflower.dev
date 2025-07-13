@@ -20,10 +20,6 @@ body {
     height: 100%;
 }
 
-canvas {
-    display: block;
-}
-
 h1 {
     position: absolute;
     top: 20px;
