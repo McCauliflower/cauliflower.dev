@@ -19,23 +19,13 @@
       min-width: 240px;
     }
 
-    #cssmenu>ul {
-      background: white;
-      margin-left: calc(50% - 120px) !important;
-      z-index: 2;
-    }
-
     #cssmenu ul li {
       min-width: 120px;
       margin-left: auto;
       margin-right: auto;
     }
 
-    #cssmenu,
-    #cssmenu ul,
-    #cssmenu ul li,
-    #cssmenu ul li a,
-    #cssmenu #menu-button {
+    #cssmenu ul {
       text-align: center;
       margin: 0 auto;
       padding: 0;
@@ -44,12 +34,41 @@
       line-height: 1;
       display: block;
       position: relative;
-      box-sizing: border-box;
+      margin-left: calc(50% - 120px) !important;
+      z-index: 2;
+      box-shadow: 2px 2px 10px rgba(0, 0, 0, 0.1);
     }
 
-    #cssmenu ul li a {
+    #cssmenu>ul>li {
+      float: left;
+      perspective: 1000px;
+    }
+
+    #cssmenu>ul>li>a {
+      display: block;
       border: none;
       box-sizing: border-box;
+      padding: 16px 20px;
+      font-size: 12pt;
+      color: #8C8479;
+      letter-spacing: 1.5px;
+      text-transform: uppercase;
+      text-decoration: none;
+      background: white;
+      transition: all .3s;
+      transform-origin: 50% 0;
+      transform-style: preserve-3d;
+      background: linear-gradient(
+        to bottom,
+        #404040,
+        #545454,
+        #686868,
+        #7c7c7c,
+        #909090
+      );
+      color: white;
+      border: 1px solid white;
+      height: 46px;
     }
 
     #cssmenu:after,
@@ -61,29 +80,6 @@
       line-height: 0;
       height: 0;
     }
-
-    #cssmenu #menu-button {
-      display: none;
-    }
-
-    #cssmenu>ul>li {
-      float: left;
-      perspective: 1000px;
-    }
-
-    #cssmenu>ul>li>a {
-      padding: 16px 20px;
-      font-size: 12pt;
-      color: #8C8479;
-      letter-spacing: 1.5px;
-      text-transform: uppercase;
-      text-decoration: none;
-      background: white;
-      transition: all .3s;
-      transform-origin: 50% 0;
-      transform-style: preserve-3d;
-    }
-
 
     #cssmenu>ul>li:hover>a,
     #cssmenu>ul>li>a:hover {

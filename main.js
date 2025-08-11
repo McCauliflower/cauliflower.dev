@@ -225,7 +225,7 @@ const update = (renderer, scene, camera, clock) => {
 	}
 
 	// Time-based index
-	const timeIndex = Math.floor((clock.getElapsedTime() / 2) % GEO_TYPES.length);
+	const timeIndex = Math.floor((clock.getElapsedTime() / 4) % GEO_TYPES.length);
 	// Combine with click offset
 	const currentIndex = (timeIndex + clickOffset) % GEO_TYPES.length;
 	GEO_TYPES.forEach(function(geo, index) {
