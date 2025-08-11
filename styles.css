@@ -1,7 +1,7 @@
 /* Import Iceberg font */
 @font-face {
     font-family: 'Iceberg';
-    src: url('./Iceberg-Regular.ttf') format('truetype');
+    src: url('./fonts/Iceberg-Regular.ttf') format('truetype');
     font-weight: normal;
     font-style: normal;
 }
