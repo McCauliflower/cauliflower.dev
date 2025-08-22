@@ -2,13 +2,27 @@
 <template>
   <header>
     <nav id="cssmenu">
-      <ul class="hidemenu">
+      <div class="logo">
+        <a href="index.html">
+          <img width="50" src="../../assets/Cauliflower.png" alt="Cauliflower Logo">
+        </a>
+      </div>
+      <ul>
         <li><a href="pages/art.html" id="one">Art</a></li>
         <li><a href="pages/code.html" id="two">Code</a></li>
       </ul>
     </nav>
   </header>
     <style>
+      .logo{
+        position: fixed;
+        top: 0;
+        left: 6px;
+        transition: all 0.3s ease;
+      }
+      .logo:hover{
+        transform: rotate(360deg);
+      }
     #cssmenu {
       line-height: 1;
       z-index: 2;
@@ -52,23 +66,15 @@
       box-sizing: border-box;
       padding: 16px 20px;
       font-size: 12pt;
-      color: #8C8479;
       letter-spacing: 1.5px;
       text-transform: uppercase;
       text-decoration: none;
-      background: white;
       transition: all .3s;
       transform-origin: 50% 0;
       transform-style: preserve-3d;
-      background: linear-gradient(
-        to bottom,
-        #404040,
-        #545454,
-        #686868,
-        #7c7c7c,
-        #909090
-      );
-      color: white;
+      background: rgb(226, 217, 217);
+      color: rgb(126, 117, 117);
+      box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
       border: 1px solid white;
       height: 46px;
     }
@@ -86,7 +92,6 @@
     #cssmenu>ul>li:hover>a,
     #cssmenu>ul>li>a:hover {
       color: #8C8479;
-      background-color: #d6d6d6;
       transform: rotateX(90deg) translateY(-23px);
       position: relative;
     }
@@ -100,15 +105,10 @@
       height: 100%;
       padding: 16px 20px;
       color: #8C8479;
-      background: #781e32;
       content: attr(data-title);
       transition: background .2s;
       transform: rotateX(-90deg);
       transform-origin: 50% 0;
-    }
-
-    #cssmenu>ul>li>a::before {
-      background-color: white;
     }
 
     #cssmenu>ul>li>a[id="one"]::before {
@@ -121,7 +121,8 @@
 
     #cssmenu>ul>li:hover>a::before,
     #cssmenu>ul>li>a:hover::before {
-      background: white;
+      background: rgb(153, 153, 153);
+      color: #ebe2d6;
     }
 
     #cssmenu:after,
