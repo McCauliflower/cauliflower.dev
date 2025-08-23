@@ -1,14 +1,10 @@
 import { defineConfig } from 'vite';
-import path from 'path';
 
 export default defineConfig({
-  root: 'public',
+  root: '.',
   build: {
     outDir: 'dist',
     emptyOutDir: true,
-  },
-  alias: {
-    '@': path.resolve(__dirname, ''),
   },
   server: {
     port: 8000,

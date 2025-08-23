@@ -112,7 +112,7 @@ const init = () => {
 
 	// renderer
 	const renderer = new THREE.WebGLRenderer();
-	const canvas = document.querySelector('#three-container');
+	const canvas = document.querySelector('#scene-container');
 	renderer.setSize(window.innerWidth, window.innerHeight - 50);
 	// Add the event listener to the renderer's canvas
 	renderer.domElement.addEventListener('click', onClick, false);
