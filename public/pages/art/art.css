@@ -98,7 +98,11 @@
 
 /* custom style */
 .container {
-  margin: 30px;
+  	margin: 30px;
+	margin-top: 0;
+	position: relative;
+	width: 90%;
+	height: calc(100vh - 60px);
 }
 
 .shadow {
