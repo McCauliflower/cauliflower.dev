@@ -14,7 +14,7 @@ html, body {
 }
 
 body {
-    padding-top: 50px;
+    padding-top: 46px;
     overflow: hidden;
     font-family: 'Iceberg', Arial, sans-serif;
     height: 100%;
@@ -32,6 +32,6 @@ h1 {
 .container {
     margin-top: 0;
     position: relative;
-    width: 90%;
+    width: 100%;
     height: calc(100vh - 60px);
 }
