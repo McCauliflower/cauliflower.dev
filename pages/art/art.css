@@ -2,8 +2,6 @@
 
 .container {
 	margin: 0px !important;
-}
-.wrapper {
 	background-image: url('/assets/images/gallery-background.jpg');
 	background-size: cover;
 	background-position: center center;
@@ -11,6 +9,9 @@
 	background-attachment: fixed;
 	min-height: 100vh;
 	width: 100vw;
+}
+.wrapper{
+	margin: auto;
 }
 .sb-slider {
 	padding-top: 100px !important;
