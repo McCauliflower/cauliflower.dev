@@ -2,11 +2,17 @@ import Navigo from "navigo";
 
 const router = new Navigo('/');
 
-const allowedRoutes = [
+const mainRoutes = [
   '/home',
   '/pages/art/art.html',
   '/pages/code/code.html',
 ];
+
+const codeProjectRoutes = [
+  '/pages/code/sites/robot-builder.html',
+]
+
+const allowedRoutes = [...mainRoutes, ...codeProjectRoutes];
 
 router.on('/', () => {
   router.navigate('/home');  // Auto-redirect to /home
