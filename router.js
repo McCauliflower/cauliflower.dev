@@ -10,6 +10,11 @@ const mainRoutes = [
 
 const codeProjectRoutes = [
   '/pages/code/sites/robot-builder.html',
+  '/pages/code/sites/unicode-hieroglyphs/unicodeLoop.html',
+  '/pages/code/sites/tree-fractal/index.html',
+  '/pages/code/sites/thesis/index.html',
+  '/pages/code/sites/divz/index.html',
+  '/pages/code/sites/snake/index.html',
 ]
 
 const allowedRoutes = [...mainRoutes, ...codeProjectRoutes];

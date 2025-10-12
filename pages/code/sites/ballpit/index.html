@@ -1,0 +1,118 @@
+<!DOCTYPE html>
+<!--[if lt IE 7]>      <html class="no-js lt-ie9 lt-ie8 lt-ie7"> <![endif]-->
+<!--[if IE 7]>         <html class="no-js lt-ie9 lt-ie8"> <![endif]-->
+<!--[if IE 8]>         <html class="no-js lt-ie9"> <![endif]-->
+<!--[if gt IE 8]><!--> <html class="no-js"> <!--<![endif]-->
+    <head>
+        <meta charset="utf-8">
+        <meta http-equiv="X-UA-Compatible" content="IE=edge">
+        <title></title>
+        <meta name="description" content="">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <!-- Load Babel -->
+        <!-- v6 <script src="https://unpkg.com/babel-standalone@6/babel.min.js"></script> -->
+        <script src="https://unpkg.com/@babel/standalone/babel.min.js"></script>
+        <style type="text/css">
+            body{ margin: 0}
+            #canvas{
+                border: 1px solid black;
+                cursor: pointer;
+                background: lightgrey;
+            }
+        </style>
+    </head>
+    <body>
+        <!--[if lt IE 7]>
+            <p class="browsehappy">You are using an <strong>outdated</strong> browser. Please <a href="#">upgrade your browser</a> to improve your experience.</p>
+        <![endif]-->
+        <canvas id="canvas" width="150" height="150"></canvas>
+       <!-- Use modern @babel/standalone with explicit plugins instead of stage-3 preset
+           to avoid loading the decorators plugin which requires decoratorsBeforeExport option. -->
+       <script type="text/babel" data-presets="env" data-plugins="proposal-class-properties">
+            let canvas = document.querySelector('#canvas');
+            let c = canvas.getContext('2d');
+            let mouse = { x: undefined, y: undefined }
+            let circlesArray = [];
+            let colorsArray = [
+                '#040f0f', '#248232', '#2ba84a', '#2d3a3a', '#fcfffc'
+            ]
+
+            canvas.width = window.innerWidth;
+            canvas.height = window.innerHeight;
+            window.addEventListener('mousemove', (event) => {
+                mouse.x = event.x
+                mouse.y = event.y
+            })
+            window.addEventListener('resize', () => {
+                canvas.width = window.innerWidth;
+                canvas.height = window.innerHeight;
+                init()
+            })
+
+            class Circle {
+                constructor(x, y, dx, dy, radius){
+                    this.x = x;
+                    this.y = y;
+                    this.dx = dx;
+                    this.dy = dy;
+                    this.radius = radius;
+                    this.minRadius = radius
+                    this.color = colorsArray[Math.floor(Math.random() * colorsArray.length)]
+                }
+                maxRadius = 40
+
+                create() {
+                    c.beginPath();
+                    c.arc( this.x, this.y, this.radius, 0, Math.PI * 2, true);
+                    c.strokeStyle = "purple"
+                    c.fillStyle = this.color
+                    c.stroke();
+                    c.fill();
+                }
+                move() {
+                    if(this.x + this.radius > window.innerWidth || this.x - this.radius < 0){
+                        this.dx = -this.dx;
+                    }
+                    if(this.y + this.radius > window.innerHeight || this.y - this.radius < 0){
+                        this.dy = -this.dy;
+                    }
+                    this.x += this.dx;
+                    this.y += this.dy;
+
+                    // interactivity 
+                    if(mouse.x - this.x < 70 && mouse.x - this.x > 0 && mouse.y - this.y < 70 && mouse.y - this.y > 0){
+                        if(this.radius < this.maxRadius){
+                            this.radius += 1
+                        }
+                    }else if( this.radius > this.minRadius){
+                        this.radius--
+                    }
+                    this.create();
+                }
+            } 
+
+            function init(){
+                circlesArray = []
+                for(let i=0; i < 300; i++){
+                    const radius = (Math.random() * 10) + 1
+                    const x = Math.random() * (window.innerWidth - radius * 2) + radius
+                    const y = Math.random() * (window.innerHeight - radius * 2) + radius
+                    const dx = (Math.random() - 0.5) * 3
+                    const dy = (Math.random() - 0.5) * 3
+                    circlesArray.push(new Circle(x, y, dx, dy, radius))
+                 }
+            }
+
+
+            function animate(){
+                requestAnimationFrame(animate);
+                c.clearRect(0, 0, innerWidth, innerHeight);
+                circlesArray.forEach( circle => circle.move())
+            }
+            init();
+            animate();
+            
+            
+        </script>
+    </body>
+</html>

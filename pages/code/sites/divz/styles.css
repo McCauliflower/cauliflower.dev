@@ -1,0 +1,8 @@
+body{
+  background: black;
+}
+
+.divzClass{
+   padding: .5em;
+   transition:all .4s ease;
+}

@@ -1,0 +1,160 @@
+
+<!DOCTYPE html>
+<!--[if lt IE 7]>      <html class="no-js lt-ie9 lt-ie8 lt-ie7"> <![endif]-->
+<!--[if IE 7]>         <html class="no-js lt-ie9 lt-ie8"> <![endif]-->
+<!--[if IE 8]>         <html class="no-js lt-ie9"> <![endif]-->
+<!--[if gt IE 8]><!--> <html class="no-js"> <!--<![endif]-->
+  <head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <title>Snake</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link href="https://fonts.googleapis.com/css2?family=Anton&display=swap" rel="stylesheet"> 
+  </head>
+  <body>
+    <!--[if lt IE 7]>
+      <p class="browsehappy">You are using an <strong>outdated</strong> browser. Please <a href="#">upgrade your browser</a> to improve your experience.</p>
+    <![endif]-->
+    <div id="scoreboard">Score: <span id="score">0</span></div>
+    <canvas id="gameCanvas"></canvas>
+    <div style="text-align: center;">
+      <p class="reload">RELOAD</p>
+    </div>
+  </body>
+</html>
+<style lang="css">
+body{
+height: 80vh;
+font-family: 'Anton', sans-serif;
+}
+#gameCanvas{
+border: 1px solid black;
+margin: 10% calc(50% - 150px) 0 calc(50% - 150px);
+}
+#scoreboard{
+width: 100px;
+height: 50px;
+margin: auto;
+position: absolute;
+top: 100px;
+color: black;
+left: calc(50% - 50px);
+text-align: center;
+}
+.reload{
+  text-align: center;
+  border: 1px solid black;
+  transition: all 1s ease;
+  padding: 5px 5px;
+  border-radius: 5px;
+  cursor: pointer;
+  margin: 15px;
+  display: inline-block;
+  font-weight: lighter;
+}
+.reload:hover{
+  color: #FF0000;
+  cursor: pointer;
+}
+
+</style>
+<script>
+  const canvas = document.getElementById('gameCanvas')
+  canvas.width = 300
+  canvas.height = 300
+  const c = canvas.getContext('2d');
+  c.fillStyle = 'white'
+
+  let score = 0;
+  let snake = [  {x: 150, y: 150},  {x: 140, y: 150},  {x: 130, y: 150},  {x: 120, y: 150},  {x: 110, y: 150},];
+  let dx = 10;
+  let dy = 0;
+  let foodX = 0
+   foodY = 0;
+  let changingDirection = false;
+
+  function clearCanvas() {  
+    c.fillStyle = "white";  c.strokeStyle = "black";
+    c.fillRect(0, 0, gameCanvas.width, gameCanvas.height);  c.strokeRect(0, 0, gameCanvas.width, gameCanvas.height);
+  }
+  function drawSnakePart(snakePart) {  
+    c.fillStyle = 'lightgreen';  c.strokestyle = 'darkgreen';
+    c.fillRect(snakePart.x, snakePart.y, 10, 10);  
+    c.strokeRect(snakePart.x, snakePart.y, 10, 10);
+  }
+  function drawSnake() {  
+    snake.forEach( part => drawSnakePart(part));
+  }
+  function advanceSnake() {  
+    const head = {x: snake[0].x + dx, y: snake[0].y + dy }
+    snake.unshift(head);
+    const didEatFood = snake[0].x === foodX && snake[0].y === foodY; 
+    if (didEatFood) {  
+      score+=10;
+      document.getElementById('score').innerHTML = score
+      createFood();  
+    } else {    
+      snake.pop();  
+    }
+  };
+
+  function randomTen(min, max) {  return Math.round((Math.random() * (max-min) + min) / 10) * 10;}
+  function createFood() {  
+    foodX = randomTen(0, gameCanvas.width - 10);  
+    foodY = randomTen(0, gameCanvas.height - 10);
+    snake.forEach(function isFoodOnSnake(part) {   
+      const foodIsOnSnake = part.x == foodX && part.y == foodY    
+      if (foodIsOnSnake) createFood();  
+    });
+  }
+
+  function drawFood() { c.fillStyle = 'red'; c.strokestyle = 'darkred'; c.fillRect(foodX, foodY, 10, 10); c.strokeRect(foodX, foodY, 10, 10);}
+
+  function didGameEnd() {  
+    for (let i = 4; i < snake.length; i++) {    
+      const didCollide = snake[i].x === snake[0].x && snake[i].y === snake[0].y
+      if (didCollide) return true  
+    }
+    const hitLeftWall = snake[0].x < 0;  
+    const hitRightWall = snake[0].x > gameCanvas.width - 10;  
+    const hitToptWall = snake[0].y < 0;  
+    const hitBottomWall = snake[0].y > gameCanvas.height - 10;
+    return hitLeftWall || hitRightWall || hitToptWall || hitBottomWall
+  }
+
+  function changeDirection(event) {  
+    const LEFT_KEY = 37;  const RIGHT_KEY = 39;  const UP_KEY = 38;  const DOWN_KEY = 40;
+    const keyPressed = event.keyCode;  
+    const goingUp = (dy === -10);  
+    const goingDown = (dy === 10);  
+    const goingRight = (dx === 10);  
+    const goingLeft = (dx === -10);
+    if (changingDirection) return;
+    changingDirection = true;
+    if (keyPressed === LEFT_KEY && !goingRight) {    dx = -10;    dy = 0;  }
+    if (keyPressed === UP_KEY && !goingDown) {    dx = 0;    dy = -10;  }
+    if (keyPressed === RIGHT_KEY && !goingLeft) {    dx = 10;    dy = 0;  }
+    if (keyPressed === DOWN_KEY && !goingDown) {    dx = 0;    dy = 10;  }
+  }
+
+  function onTick() {
+    changingDirection = false;     
+    clearCanvas(); 
+    drawFood();
+    advanceSnake();    
+    drawSnake();   
+    main();  
+  }
+  function main() {  
+    if (didGameEnd()) return;
+    setTimeout(onTick, 100)
+  }
+
+  document.addEventListener("keydown", changeDirection)
+  document.addEventListener("click", () => window.location.reload())
+  drawSnake()
+  createFood()
+  main()
+
+
+</script>

@@ -1,0 +1,70 @@
+<!DOCTYPE HTML>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>Thesis</title>
+    <meta name="viewport" content="width=device-width,initial-scale=1">
+	<meta name="title" content="Art By Pristique. Artificial Alchemy by Pristique">
+    <meta name="keywords" content="Visionary Art, Digital Alchemy, Digital Alchemist, Web Design and Development, Freelance Artist">
+	<meta name="author" content="McCall (Pristique) Tucker">
+    <meta name="description" content="Visionary Artist / Digital Alchemist from Cincinnati, OH. I specialize in web development, art,  animation, graphic design, photo and video.">
+        <link rel="icon" type="image/png" href="images/icons/myicon.png">
+		<link rel="stylesheet" type="text/css" href="reset.css"/>
+		<link rel="stylesheet" type="text/css" href="Sass/thesis.css"/>
+		<link rel="stylesheet" type="text/css" href="Sass/cube.css"/>
+
+		<script src="jQuery.js"></script>
+</head>
+<body>
+<!--This website was hand-coded using html, css, and javascript! :) Thanks for looking! Please visit http://www.artbypristique.com/-->
+<!--[if lt IE 9]>
+    <script src="html5shiv.min.js"></script>
+<![endif]-->
+<div id="wrapper">
+<div id="content">
+	<div class="perspective">
+			<section id="leftPyramid">
+				<div></div>
+				<div></div>
+				<div></div>
+				<div></div>
+	    </section>
+			
+			<section id="rightPyramid">
+				<div></div>
+				<div></div>
+				<div></div>
+				<div></div>
+	    </section>
+
+	</div><!--end perspetive-->
+
+	<img id="mainPhoto" src="images/figures/eye-final.png" height="500px" width="auto" alt="Eye of horus">
+</div><!--end "content"-->
+
+
+<div id="footer">
+
+<script type="text/javascript">
+
+var src = ['images/figures/eye-final.png','images/figures/tatooes-final.png', 'images/figures/averagejoe-final.png', 'images/figures/suit+tie-final.png', 'images/figures/woman-final.png'];
+var i = 0;
+$("#mainPhoto").click(function(){
+		if(i < src.length - 1){
+         i++;
+			   console.log(i);
+			   $("#mainPhoto").attr('src', src[i]);
+    }else{
+         i = 0;
+				 $("#mainPhoto").attr('src', src[i]);
+         }
+});
+
+
+</script>
+
+
+</div><!--end footer-->
+</div><!--end "wrapper"-->
+</body>
+</html>

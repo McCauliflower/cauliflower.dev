@@ -1,0 +1,393 @@
+
+
+$baseColor: #dbd0c5;
+$leftMargin: calc(50% - 400px);
+$border: 50px solid transparent;
+
+@mixin triangle{
+	opacity: .4;
+    position: absolute;
+    height: 0;
+    width: 0px;
+    bottom: 540px;
+    border-left: $border;
+    border-right: $border;
+    border-bottom: 100px solid darken(red, 10%);
+    z-index: 99;
+    transition: all 2s ease;
+    animation: rotation 10s infinite, triangleAnimation 10s infinite;
+
+	&:hover{
+			animation: rotationHover 1s infinite alternate,
+        	triangleAnimation 10s infinite;
+		  opacity:1;
+  	  border-bottom: 100px solid white;
+			transform:rotate3d(1,1,1,360deg) !important;
+	}
+}
+
+@mixin flip{
+	animation: rotationHover 1s infinite alternate,
+							circleAnimation 10s infinite;
+	transition: all 2s ease;
+	transform:rotate3d(1,1,1,360deg) !important;
+}
+
+body{
+	background-color:#180914;
+	background-image:url("../images/background-images/space.jpg") !important;
+	background-size: cover !important;
+	background-repeat:no-repeat;
+	cursor: url(http://www.rw-designer.com/cursor-extern.php?id=6277), auto;
+}
+
+#mainPhoto{
+	position: absolute;
+    bottom: 0px;
+    width: 800px;
+    height: 560px;
+    left: $leftMargin;
+}
+
+#leftPyramid{
+	left: calc(50% - 300px);
+}
+#rightPyramid{
+	right:calc(50% - 470px);
+}
+#leftSquare{
+	left:calc(50% - 375px);
+}
+#rightSquare{
+	right:calc(50% - 375px);
+}
+#leftWheel{
+	left: calc(50% - 400px);
+}
+#rightWheel{
+	right: calc(50% - 270px);
+}
+
+
+#reset{
+	opacity:.8em;
+	margin-left:46%;
+}
+
+
+
+/***************    PYRAMID     *************************/
+
+
+@keyframes spin {
+  from {
+    transform: rotateY(0deg) rotateX(0deg) rotateZ(0deg);
+  }
+  to {
+   transform: rotateY(360deg) rotateX(360deg) rotateZ(360deg);
+  }
+}
+
+
+#leftPyramid, #rightPyramid{
+  	bottom: 460px;
+	  position: absolute;
+	  display:inline-block;
+    margin: auto;
+    height: 200px;
+    width: 200px;
+    transform-style: preserve-3d;
+    animation: spin 10s linear infinite;
+    transform-origin: 10px;
+		z-index:100;
+		transition: all .5s ease;
+}
+#leftPyramid div:hover, #rightPyramid div:hover{
+	  transform-origin: 250px;
+}
+#leftPyramid div, #rightPyramid div {
+    position: absolute;
+    border-style: solid;
+    border-width: 50px 0 50px 86.5px;
+    transform-origin: 0 0;
+		transition:all .7s ease;
+}
+
+.activatedPyramid{
+	height:120% !important;
+}
+
+#leftPyramid > div:first-child, #rightPyramid > div:first-child {
+    border-color: transparent transparent transparent #f5a919 /*magenta*/;
+    transform: rotateY(-19.5deg) rotateX(180deg) translateY(-100px);
+		opacity:.5 !important;
+		transition:all .7s ease;
+}
+
+#leftPyramid > div:nth-child(2),#rightPyramid > div:nth-child(2)  {
+    border-color: transparent transparent transparent #3901bd /*purple */ ;
+    transform: rotateY(90deg) rotateZ(60deg) rotateX(180deg) translateY(-100px);
+		opacity:.5 !important;
+		transition:all .7s ease;
+}
+
+#leftPyramid > div:nth-child(3), #rightPyramid > div:nth-child(3)  {
+    border-color: transparent transparent transparent #1ef237 /*bright green*/;
+    transform: rotateX(60deg) rotateY(19.5deg);
+		opacity:.5 !important;
+		transition:all .7s ease;
+}
+
+#leftPyramid > div:nth-child(4), #rightPyramid > div:nth-child(4) {
+    border-color: transparent transparent transparent rgba(250, 250, 250, 0.2) /*bright yellow*/;
+    transform: rotateX(-60deg) rotateY(19.5deg) translateX(-29px) translateY(-50px) translateZ(81.5px);
+		transition:all .7s ease;
+}
+
+/*
+.explode{
+	transform: translateY(100px) !important;
+}
+*/
+
+/******************      CUBES       ********************/
+
+$baseHeight: 75px;
+$baseWidth: 75px;
+
+.sizeActivated{
+  height: $baseHeight + 75 !important;
+	width: $baseWidth + 75 !important;
+}
+.sizeDeactived{
+	height: $baseHeight - 75 !important;
+	width: $baseWidth - 75 !important;
+}
+.sizeActivated .front{
+  transform: translateZ(50px);
+}
+
+#leftCubeContainer, #rightCubeContainer{
+	z-index:99;
+	direction: ltr;
+	transition: all 1s ease-in;
+}
+
+.leftWrap, .rightWrap{
+		z-index:99;
+		position:absolute;
+		height:200px;
+		width:200px;
+		bottom:275px;
+}
+.leftWrap{
+	left:calc(50% + 200px);
+}
+.rightWrap{
+	right:calc(50% + 200px);
+}
+.leftCube, .rightCube  {
+		margin: auto;
+		position: relative;
+		height: $baseHeight;
+		width: $baseWidth;
+		transform-style: preserve-3d;
+		transition: all .4s ease-in;
+
+}
+.leftCube{
+	left:calc(50% - 200px;)
+}
+.rightCube{
+	right: calc(50% - 200px;)
+}
+
+		.leftCube div, .rightCube div {
+				position: absolute;
+				padding: 10px;
+				box-sizing: border-box;
+				height: 100%;
+				width: 100%;
+				opacity: 0.9;
+				background-color: #000;
+				border: solid 1px #eee;
+				color: #fff;
+				font: 10px arial;
+				transition: transform 0.4s ease-in;
+		}
+
+.front {
+		transform: translateZ(-25px);
+		opacity:.6 !important;
+		background-color:red !important;
+		transition: transform 0.4s ease-in;
+}
+.back {
+		transform: translateZ(-100px) rotateY(180deg);
+		opacity:.6 !important;
+		background-color:red !important;
+}
+.right {
+		transform: rotateY(-270deg) translateX(100px);
+		transform-origin: top right;
+		opacity:.6 !important;
+		background-color:#03ffee /*neon blue */ !important;
+}
+.left {
+		transform: rotateY(270deg) translateX(-100px);
+		transform-origin: center left;
+		opacity:.6 !important;
+		background-color:#29ff23 /*bright green*/ !important;
+
+}
+.top {
+		transform: rotateX(-270deg) translateY(-100px);
+		transform-origin: top center;
+		opacity:.6 !important;
+		background-color:blue !important;
+
+
+}
+.bottom {
+		transform: rotateX(270deg) translateY(100px);
+		transform-origin: bottom center;
+		opacity:.9 !important;
+		background-color:blue !important;
+
+}
+
+@keyframes rotate {
+		from {
+				transform: rotateX(0deg) rotateY(0deg);
+		}
+
+		to {
+				transform: rotateX(360deg) rotateY(360deg);
+		}
+}
+
+.leftCube, .rightCube {
+		animation: rotate 20s infinite linear;
+}
+.leftWrap:hover .front, .rightWrap:hover .front {
+		transform: translateZ(30px) !important;
+}
+.leftWrap:hover .back, .rightWrap:hover .back {
+		transform: translateZ(-150px) rotateY(180deg);
+}
+.leftWrap:hover .right, .rightWrap:hover .right {
+		transform: rotateY(-270deg) translateZ(50px) translateX(100px);
+}
+.leftWrap:hover .left, .rightWrap:hover .left {
+		transform: rotateY(270deg) translateZ(50px) translateX(-100px);
+}
+.leftWrap:hover .top, .rightWrap:hover .top {
+		transform: rotateX(-270deg) translateZ(50px) translateY(-100px);
+}
+.leftWrap:hover .bottom, .rightWrap:hover .bottom{
+		transform: rotateX(270deg) translateZ(50px) translateY(100px);
+}
+
+
+
+.sizeActivated:hover .front{
+    transform: translateZ(100px) !important;
+}
+
+
+
+
+
+
+/******************      CIRCLE       ********************/
+
+
+@keyframes spinning {
+  to {
+    transform: rotateX(360deg) rotateY(360deg);
+  }
+}
+
+@keyframes show {
+  to {
+    opacity: 1;
+  }
+}
+
+body {
+  background-color: #000000;
+}
+.leftCircle, .rightCircle{
+  width:150px;
+  height:150px;
+  margin:2% auto;
+  perspective: 800px;
+  z-index: 100;
+}
+.leftCircle{
+	position:absolute;
+	left: calc(50% - 340px);
+  bottom: 140px;
+}
+.rightCircle{
+	position:absolute;
+	right: calc(50% - 340px);
+  bottom: 140px;
+}
+.wrapper {
+  width:100%;
+  height:100%;
+  transform: rotateX(45deg) rotateY(45deg);
+	transform-style: preserve-3d !important;
+}
+.ball {
+  position: relative;
+  width: 70%;
+  height: 70%;
+  margin:0 auto;
+  transform-style:  preserve-3d;
+  animation: spinning 7.5s 1.3s infinite linear;
+  transition: .5s all ease-in;
+}
+.ball .slice {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  border:3px;
+  border-style: dashed;
+  border-radius: 50%;
+  opacity: 0;
+  animation: show 0.75s forwards ease-in-out;
+  transition: .5s all ease-in;
+	clip-path: circle(50%);
+	opacity:.3;
+}
+.changeHeight1{
+  height:5% !important;
+}
+.changeHeight2{
+  height:200% !important;
+	width:200% !important;
+}
+.sliceHover{
+  border-style:solid !important;
+  border-radius:100% !important;
+}
+
+
+$child:0;
+$delay:0.0;
+$color: red;
+$border:1px;
+
+@for $child from 1 to 80{
+     .slice:nth-child(#{$child +1}){
+         transform: rotateY(#{$child * 4}deg);
+         color:$color;
+         $color:adjust-hue($color, 7%);
+         animation-delay: #{$delay + 0.1}s;
+         $delay: $delay + 0.2;
+     }
+}

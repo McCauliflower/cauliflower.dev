@@ -1,0 +1,184 @@
+/*	
+	Filename:		reset.css
+	Description:	Resets default HTML styles across browsers 
+	1/8/13			Includes HTML5 patches
+*/
+
+
+/* MARGINS, PADDING & FONT SIZE 
+-------------------------------------------------- */
+html, body, div, span, applet, object, iframe,
+h1, h2, h3, h4, h5, h6, p, blockquote, pre,
+a, abbr, acronym, address, big, cite, code,
+del, dfn, font, img, ins, kbd, q, s, samp,
+small, strike, sub, sup, tt, var,
+dl, dt, dd, ol, ul, li,
+fieldset, form, label, legend,
+table, caption, tbody, tfoot, thead, tr, th, td {
+	margin: 0;
+	padding: 0;
+	border: 0;
+	outline: 0;
+	font-size: 100%;
+	vertical-align: baseline;
+	background: transparent;
+}
+
+address,caption,cite,code,dfn,th,var {
+	font-style:normal;
+	font-weight:normal;
+}
+
+body {
+	line-height: 1;
+}
+
+p {
+	margin-bottom: 1em;
+}
+
+
+
+/*  TABLES 
+-------------------------------------------------- */
+caption,
+th {
+	font-weight: bold;
+	text-align:left;
+}
+
+table {
+	border-collapse:collapse;
+	border-spacing:0;
+}
+
+
+
+/*  FORMS
+-------------------------------------------------- */
+fieldset {
+	border: 1px solid black;
+	padding: 1em;
+}
+
+legend {
+	font-weight: bold;
+}
+
+
+
+/* BORDERS 
+-------------------------------------------------- */
+img {
+	border:0;
+}
+
+
+abbr,
+acronym {
+	border-bottom: 1px dotted #666;
+	cursor:help;
+}
+
+
+/* MISCELLANEOUS 
+-------------------------------------------------- */
+
+del {
+	text-decoration: line-through;
+}
+
+blockquote, 
+q {
+	quotes: none;
+}
+
+blockquote:before, 
+blockquote:after,
+q:before,
+q:after {
+	content: " ";
+	content: none;
+}
+
+dfn {
+    font-style: italic;
+}
+
+code,
+kbd,
+pre,
+samp {
+    font-family: monospace, serif;
+}
+
+pre {
+    white-space: pre;
+    white-space: pre-wrap;
+    word-wrap: break-word;
+}
+
+sub,
+sup {
+    font-size: 75%;
+    line-height: 0;
+    position: relative;
+    vertical-align: baseline;
+}
+
+sup {
+    top: -0.5em;
+}
+
+sub {
+    bottom: -0.25em;
+}
+
+
+/* HTML5 PATCHES
+-------------------------------------------------- */
+/* Corrects `block` display not defined in IE 8/9 */
+article,
+aside,
+details,
+figcaption,
+figure,
+footer,
+header,
+hgroup,
+nav,
+section,
+summary {
+    display: block;
+}
+
+/*Corrects `inline-block` display not defined in IE 8/9 */
+audio,
+canvas,
+video {
+    display: inline-block;
+}
+
+/* Prevents modern browsers from displaying `audio` without controls.
+   Remove excess height in iOS 5 devices.  */
+
+audio:not([controls]) {
+    display: none;
+    height: 0;
+}
+
+
+/* Addresses styling for `hidden` attribute not present in IE 8/9 */
+[hidden] {
+    display: none;
+}
+
+/* Corrects overflow displayed oddly in IE 9.  */
+svg:not(:root) {
+    overflow: hidden;
+}
+
+/* Addresses margin not present in IE 8/9 and Safari 5. */
+figure {
+    margin: 0;
+}
