@@ -12,6 +12,8 @@
   "dependencies": {
     "connect-history-api-fallback": "^2.0.0",
     "express": "^5.1.0",
+    "navigo": "^8.11.1",
+    "page": "^1.11.6",
     "vite": "^7.1.4"
   },
   "type": "module"

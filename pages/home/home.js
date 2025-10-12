@@ -1,4 +1,4 @@
-const scene = new THREE.Scene();
+let scene = new THREE.Scene();
 let clickOffset = 0;
 const clock = new THREE.Clock();
 const raycaster = new THREE.Raycaster();
