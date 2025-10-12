@@ -112,6 +112,13 @@
   height: 0;
 }
 
+#login {
+  font-family: 'Iceberg', Arial, sans-serif;
+  position: absolute;
+  right: 0;
+  top: 0;
+}
+
 #login ul {
   text-align: center;
   margin: 0 auto;

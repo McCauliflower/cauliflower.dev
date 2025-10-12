@@ -3,6 +3,7 @@ import Navigo from "navigo";
 const router = new Navigo('/');
 
 const mainRoutes = [
+  '/',
   '/home',
   '/pages/art/art.html',
   '/pages/code/code.html',
@@ -20,7 +21,7 @@ const codeProjectRoutes = [
 const allowedRoutes = [...mainRoutes, ...codeProjectRoutes];
 
 router.on('/', () => {
-  router.navigate('/home');  // Auto-redirect to /home
+  router.navigate('/');  // Auto-redirect to /home
 });
 
 allowedRoutes.forEach(route => {
