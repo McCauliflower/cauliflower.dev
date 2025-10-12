@@ -22,7 +22,6 @@ router.notFound(() => {
   window.location.href = '/404.html';
 });
 
-// Start the router
 router.resolve();
 
 

@@ -19,6 +19,7 @@
   line-height: 1;
   height: 46px;
   background: white;
+  box-shadow: 3px 4px 6px 6px lightgrey;
 }
 #cssmenu ul li {
   min-width: 120px;

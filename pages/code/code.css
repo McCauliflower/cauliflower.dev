@@ -1,7 +1,48 @@
-/* Placeholder for code page CSS */
-body {
-    font-family: sans-serif;
+.container {
+    max-width: 100%;
+    padding: 0;
+    margin: 0;
 }
-h1 {
-    color: #333;
+
+.wrapper {
+    padding: 0;
+    margin: 0;
+}
+
+.grid {
+    padding-top: 100px;
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 20px;
+    row-gap: 40px;
+    box-sizing: border-box;
+    max-width: 80%;
+    margin: 0 auto;
+}
+
+.grid-item {
+    box-shadow: 0px 0px 5px 0px;
+    text-align: center;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    width: 200px;
+    height: 200px;
+}
+
+.grid-item:hover {
+    box-shadow: 0px 0px 15px 5px rgba(0, 0, 0, 0.2);
+    transform: rotateY(360deg);
+    transition: all 2s ease;
+}
+
+.grid-item img {
+    width: 100%;
+    height: auto;
+    max-width: 200px; 
+}
+
+.grid-item h1 {
+    margin: 10px 0 0 0;
+    font-size: 1.2em;
 }
