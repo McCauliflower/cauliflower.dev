@@ -7,6 +7,7 @@ const mainRoutes = [
   '/home',
   '/pages/art/art.html',
   '/pages/code/code.html',
+  '/pages/login/login.html',
 ];
 
 const codeProjectRoutes = [
