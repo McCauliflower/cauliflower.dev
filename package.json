@@ -5,16 +5,20 @@
   "repository": "git@github.com:McCauliflower/cauliflower.dev.git",
   "license": "MIT",
   "scripts": {
-    "dev": "vite serve",
-    "build": "vite build",
-    "preview": "vite preview"
+  "build": "vite build",
+  "preview": "vite preview",
+  "dev": "concurrently -k \"npm:dev:server\" \"npm:dev:vite\"",
+  "dev:server": "node server/index.js",
+  "dev:vite": "vite"
   },
   "dependencies": {
-    "connect-history-api-fallback": "^2.0.0",
-    "express": "^5.1.0",
-    "navigo": "^8.11.1",
-    "page": "^1.11.6",
-    "vite": "^7.1.4"
+    "connect-history-api-fallback": "~2.0.0",
+    "navigo": "~8.11.1",
+    "page": "~1.11.6",
+    "vite": "~7.1.4"
   },
-  "type": "module"
+  "type": "module",
+  "devDependencies": {
+    "concurrently": "~9.2.1"
+  }
 }

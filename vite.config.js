@@ -5,12 +5,24 @@ export default defineConfig({
   server: {
     hmr: {
       overlay: true,
-      port: 24678, // Try a different HMR port if conflicts
+      port: 5174,
     },
     optimizeDeps: { force: true },
     watch: {
       usePolling: true, 
       ignored: ['**/node_modules/**', '**/.git/**'],
     },
+  },
+  proxy: {
+    // Proxy auth routes to Express
+    '/auth': {
+      target: 'http://localhost:3000',
+      changeOrigin: true,
+    },
+    // Proxy API routes to Express
+    '/api': {
+      target: 'http://localhost:3000',
+      changeOrigin: true,
+    }
   }
 });

@@ -7,7 +7,14 @@ const mainRoutes = [
   '/home',
   '/pages/art/art.html',
   '/pages/code/code.html',
-  '/pages/login/login.html',
+  '/pages/auth/auth.html',
+  '/auth/login',
+  '/auth/login?screen_hint=signup',
+  '/auth/logout',
+  '/auth/callback',
+  '/api/user',
+  '/api/protected',
+  '/api/data'
 ];
 
 const codeProjectRoutes = [
@@ -31,9 +38,9 @@ allowedRoutes.forEach(route => {
   });
 });
 
-router.notFound(() => {
-  window.location.href = '/404.html';
-});
+// router.notFound(() => {
+//  window.location.href = '/404.html';
+// });
 
 router.resolve();
 
