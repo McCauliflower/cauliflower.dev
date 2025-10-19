@@ -15,12 +15,12 @@ export default defineConfig({
   },
   proxy: {
     // Proxy auth routes to Express
-    '/auth': {
+    '/auth/*': {
       target: 'http://localhost:3000',
       changeOrigin: true,
     },
     // Proxy API routes to Express
-    '/api': {
+    '/api/*': {
       target: 'http://localhost:3000',
       changeOrigin: true,
     }

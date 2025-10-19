@@ -15,5 +15,8 @@
     "express": "~5.1.0",
     "express-openid-connect": "~2.19.2"
   },
-  "type": "module"
+  "type": "module",
+  "devDependencies": {
+    "helmet": "^8.1.0"
+  }
 }

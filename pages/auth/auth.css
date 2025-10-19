@@ -8,11 +8,14 @@
     justify-content: space-between;
     padding: 20px;
 }
-#auth-buttons a{
+.login {
     text-decoration: none;
     color: black;
     padding: 10px 20px;
     border: 2px solid black;
-    margin: 20px;
-    box-shadow: 0 0 10px rgba(0,0,0,0.1);
+}
+.login:hover {
+    background-color: black;
+    color: white;
+    cursor: pointer;
 }
