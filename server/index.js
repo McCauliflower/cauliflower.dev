@@ -43,19 +43,32 @@ const config = {
   issuerBaseURL: process.env.AUTH0_ISSUER_BASE_URL,
   clientSecret: process.env.AUTH0_CLIENT_SECRET,
   routes: {
-    login: '/auth/login',
+    login: false,
     logout: '/auth/logout',
     callback: '/auth/callback',
   },
-  // Ask for what you need (id token + optional API access token)
   authorizationParams: {
     response_type: 'code',
     scope: 'openid profile email',
-    ...(process.env.AUTH0_AUDIENCE ? { audience: process.env.AUTH0_AUDIENCE } : {})
   },
-
+  afterCallback: (req, res, session, state) => {
+    // You can mutate the session here, if needed:
+    session.user.lastLogin = new Date().toISOString();
+    return '/pages/auth/auth.html';
+  },
 };
 app.use(auth(config));
+
+app.get('/auth/login', (req, res) => {
+  res.oidc.login({
+    returnTo: '/pages/auth/auth.html', // or wherever you want to land
+    authorizationParams: {
+      response_type: 'code',
+      scope: 'openid profile email',
+      ...(process.env.AUTH0_AUDIENCE ? { audience: process.env.AUTH0_AUDIENCE } : {}),
+    },
+  });
+});
 
 // Check if user is authenticated
 app.get('/api/user', (req, res) => {
@@ -70,7 +83,6 @@ app.get('/api/user', (req, res) => {
     res.json({ isAuthenticated: false });
   }
 });
-
 
 // Protected API route example
 app.get('/api/protected', requiresAuth(), (req, res) => {

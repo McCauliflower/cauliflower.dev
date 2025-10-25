@@ -23,7 +23,7 @@ const codeProjectRoutes = [
 const allowedRoutes = [...mainRoutes, ...codeProjectRoutes];
 
 router.on('/', () => {
-  router.navigate('/');  // Auto-redirect to /home
+   // Auto-redirect
 });
 
 allowedRoutes.forEach(route => {

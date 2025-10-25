@@ -8,14 +8,14 @@ async function getSession() {
 }
 
 function wireLoginButton() {
-  document.querySelector('.login')?.addEventListener('click', async () => {
+  document.querySelector('#btn-login')?.addEventListener('click', async () => {
     const session = await getSession();
     console.log('Session data:', session);
     if (session.isAuthenticated) {
       console.log('User is already authenticated:', session.user);
     } else {
-        console.log('redirect to login')
-        window.location.href = '/pages/auth/login';
+      console.log('redirect to login')
+      window.location.href = '/auth/login?returnTo=' + encodeURIComponent('/pages/auth/auth.html');
     }
   });
 }
