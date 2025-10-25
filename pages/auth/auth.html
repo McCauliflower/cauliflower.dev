@@ -1,3 +1,4 @@
+<!--auth.html-->
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -7,12 +8,30 @@
 <body>
     <nav-menu></nav-menu>
     <div class="container">
-        <nav>
-            <div id="auth-buttons"></div>
-            <div id="user-info">
-                <div class="login">Login</div>
-            </div>
-        </nav>
+        <div id="login-auth-form">
+            <form>
+                <h2>Login</h2>
+                <label for="username">Username:</label>
+                <input type="text" id="username" name="username" required>
+                
+                <label for="password">Password:</label>
+                <input type="password" id="password" name="password" required>
+                
+                <button class="login" type="submit">Login</button>
+            </form>
+        </div>
+        <div id="register-auth-form">
+            <form>
+                <h2>Register</h2>
+                <label for="username">Username:</label>
+                <input type="text" id="username" name="username" required>
+                
+                <label for="password">Password:</label>
+                <input type="password" id="password" name="password" required>
+                
+                <button class="login" type="submit">Login</button>
+            </form>
+        </div>
     </div>
     <script type="module" src="./auth.js"></script>
     <script type="module" src="/components/head/inject-head.js"></script>

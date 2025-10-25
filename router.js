@@ -1,3 +1,4 @@
+// router.js
 import Navigo from "navigo";
 
 const router = new Navigo('/');
@@ -8,13 +9,6 @@ const mainRoutes = [
   '/pages/art/art.html',
   '/pages/code/code.html',
   '/pages/auth/auth.html',
-  '/auth/login',
-  '/auth/login?screen_hint=signup',
-  '/auth/logout',
-  '/auth/callback',
-  '/api/user',
-  '/api/protected',
-  '/api/data'
 ];
 
 const codeProjectRoutes = [

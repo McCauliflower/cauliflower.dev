@@ -1,3 +1,4 @@
+// server/index.js
 import dotenv from 'dotenv'
 import express from 'express';
 import pkg from 'express-openid-connect';
@@ -69,6 +70,7 @@ app.get('/api/user', (req, res) => {
     res.json({ isAuthenticated: false });
   }
 });
+
 
 // Protected API route example
 app.get('/api/protected', requiresAuth(), (req, res) => {

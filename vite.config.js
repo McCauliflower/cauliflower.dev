@@ -1,28 +1,26 @@
 import { defineConfig } from 'vite';
 
 export default defineConfig({
-  root: '.', // Ensure root is correct
+  root: '.',
   server: {
-    hmr: {
-      overlay: true,
-      port: 5174,
-    },
-    optimizeDeps: { force: true },
-    watch: {
-      usePolling: true, 
-      ignored: ['**/node_modules/**', '**/.git/**'],
+    port: 5173,                 // make it explicit
+    hmr: {                      // usually you can omit this entirely
+      overlay: true
     },
     proxy: {
-    // Proxy auth routes to Express
-    '/auth': {
-      target: 'http://localhost:3000',
-      changeOrigin: true,
+      '/auth': {
+        target: 'http://localhost:3000',
+        changeOrigin: true,
+      },
+      '/api': {
+        target: 'http://localhost:3000',
+        changeOrigin: true,
+      },
     },
-    // Proxy API routes to Express
-    '/api': {
-      target: 'http://localhost:3000',
-      changeOrigin: true,
-    }
-  }
+    watch: {
+      usePolling: true,
+      ignored: ['**/node_modules/**', '**/.git/**'],
+    },
+    optimizeDeps: { force: true },
   },
 });

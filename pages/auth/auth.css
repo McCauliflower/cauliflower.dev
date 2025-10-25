@@ -2,7 +2,6 @@
     padding: 100px;
     height: 100vh;
     width: 100vw;
-    display: flex
 }
 #auth-buttons{
     justify-content: space-between;
@@ -18,4 +17,10 @@
     background-color: black;
     color: white;
     cursor: pointer;
+}
+
+#register-auth-form, #login-auth-form{
+    display: block;
+    padding-top: 50px;
+    width: 100%;
 }
