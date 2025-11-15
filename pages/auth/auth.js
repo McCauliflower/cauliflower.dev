@@ -15,7 +15,7 @@ function wireLoginButton() {
       console.log('User is already authenticated:', session.user);
     } else {
       console.log('redirect to login')
-      window.location.href = '/auth/login?returnTo=' + encodeURIComponent('/pages/auth/auth.html');
+      window.location.href = '/auth/login?returnTo=' + encodeURIComponent('/auth');
     }
   });
 }

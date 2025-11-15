@@ -243,4 +243,18 @@ const update = (renderer, scene, camera, clock) => {
 	});
 }
 
-scene = init();
+// Wait for the #three-container to exist before initializing the scene
+// This handles the case where scene.js runs before Vue renders the Home component
+function waitForContainer() {
+	const container = document.querySelector('#three-container');
+	if (container && container.offsetParent !== null) {
+		// Container exists and is visible in the DOM
+		scene = init();
+	} else {
+		// Container doesn't exist yet, retry in 100ms
+		setTimeout(waitForContainer, 100);
+	}
+}
+
+// Start waiting for the container
+waitForContainer();

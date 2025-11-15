@@ -1,7 +1,9 @@
 import { defineConfig } from 'vite';
+import vue from '@vitejs/plugin-vue';
 
 export default defineConfig({
   root: '.',
+  plugins: [vue()],
   server: {
     port: 5173,                 // make it explicit
     hmr: {                      // usually you can omit this entirely
