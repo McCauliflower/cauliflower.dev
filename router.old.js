@@ -6,9 +6,9 @@ const router = new Navigo('/');
 const mainRoutes = [
   '/',
   '/home',
-  '/pages/art/art.html',
-  '/pages/code/code.html',
-  '/pages/auth/auth.html',
+  '/art',
+  '/code',
+  '/auth',
 ];
 
 const codeProjectRoutes = [
