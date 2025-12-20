@@ -7,6 +7,7 @@ const Code = () => import('../pages/Code.vue');
 const Auth = () => import('../pages/Auth.vue');
 const NotFound = () => import('../pages/NotFound.vue');
 
+
 const routes = [
   { path: '/', component: Home },
   { path: '/art', component: Art },
