@@ -1,22 +1,15 @@
 <template>
-<<<<<<< HEAD
   <div id="app">
     <canvas id="canvas"></canvas>
     <div class="container">
       <div class="wrapper">
           <div class="carousel">
-=======
-  <div class="container">
-    <div class="wrapper">
-      <div class="carousel">
->>>>>>> 3e6edbf6e7b28d5948aadc96c227392b0e5cb488
             <button class="nav prev" @click="prev" aria-label="Previous">◀</button>
             <div class="viewport">
               <img :src="current.src" :alt="current.alt" class="slide" draggable="false" />
             </div>
             <button class="nav next" @click="next" aria-label="Next">▶</button>
           </div>
-<<<<<<< HEAD
           <div class="dots">
             <button
               v-for="(img, i) in images"
@@ -27,33 +20,14 @@
               :aria-label="`Go to slide ${i + 1}`"
             ></button>
           </div>
-=======
-
-      <div class="dots">
-        <button
-          v-for="(img, i) in images"
-          :key="i"
-          :class="['dot', { active: i === index }]
-          "
-          @click="go(i)"
-          :aria-label="`Go to slide ${i + 1}`"
-        ></button>
->>>>>>> 3e6edbf6e7b28d5948aadc96c227392b0e5cb488
       </div>
     </div>
   </div>
 </template>
 
-<<<<<<< HEAD
-<script>
+<script setup>
 import AttractionCursor from "https://cdn.jsdelivr.net/npm/threejs-components@0.0.26/build/cursors/attraction1.min.js"
 import { ref, computed, onMounted, onUnmounted } from 'vue';
-// import '/pages/art/art.css';
-=======
-<script setup>
-import { ref, computed, onMounted, onUnmounted } from 'vue';
-import '/pages/art/art.css';
->>>>>>> 3e6edbf6e7b28d5948aadc96c227392b0e5cb488
 
 // Images list copied from original page
 const images = [
@@ -104,33 +78,19 @@ function go(i) {
   index.value = i;
 }
 
-<<<<<<< HEAD
-export default {
-  setup() {
-    onMounted(() => {
-      const app = AttractionCursor(document.getElementById('canvas'), {
-        particles: {
-          attractionIntensity: 0.75,
-          size: 1.5,  
-        },
-      })
-      timer = setInterval(() => next(), autoplayMs);
-    })
+onMounted(() => {
+  const app = AttractionCursor(document.getElementById('canvas'), {
+    particles: {
+      attractionIntensity: 0.75,
+      size: 1.5,  
+    },
+  })
+  timer = setInterval(() => next(), autoplayMs);
+})
 
-    onUnmounted(() => {
-      if (timer) clearInterval(timer);
-    });
-
-    return {
-      images,
-      index,
-      current,
-      next,
-      prev,
-      go
-    }
-  }
-}
+onUnmounted(() => {
+  if (timer) clearInterval(timer);
+});
 </script>
 <style scoped>
 #app {
@@ -199,24 +159,4 @@ export default {
 .dot.active { 
   background:#666; 
 }
-=======
-onMounted(() => {
-  timer = setInterval(() => next(), autoplayMs);
-});
-
-onUnmounted(() => {
-  if (timer) clearInterval(timer);
-});
-</script>
-<style scoped>
-/* simple slider styles */
-.container { padding-top: 60px; }
-.carousel { display:flex; align-items:center; justify-content:center; gap:12px; }
-.viewport { width: min(900px, 90vw); height: min(600px, 70vh); display:flex; align-items:center; justify-content:center; overflow:hidden; background:#000; }
-.viewport .slide { max-width:100%; max-height:100%; object-fit:contain; display:block; }
-.nav { background:transparent; border:none; font-size:24px; cursor:pointer; padding:8px 12px; color:white; }
-.dots { display:flex; justify-content:center; gap:6px; margin-top:12px; }
-.dot { width:12px; height:12px; border-radius:50%; background:#ccc; border:none; cursor:pointer; }
-.dot.active { background:#666; }
->>>>>>> 3e6edbf6e7b28d5948aadc96c227392b0e5cb488
 </style>
