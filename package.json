@@ -22,7 +22,6 @@
   },
   "type": "module",
   "devDependencies": {
-    "@vitejs/plugin-vue": "^4.6.2",
-    "concurrently": "~9.2.1"
+    "@vitejs/plugin-vue": "^4.6.2"
   }
 }
