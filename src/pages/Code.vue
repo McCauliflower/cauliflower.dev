@@ -28,8 +28,8 @@
         </a>
         <a href="./sites/divz/index.html">
           <div class="grid-item">
-            <img class="image" src="/assets/images/code_thumnails/sun-shades-thumb.png" alt="Sun Shader" />
-            <div class="image-label">Sun Shader</div>
+            <img class="image" src="/assets/images/code_thumnails/sun-shades-thumb.png" alt="Divz" />
+            <div class="image-label">Divz</div>
           </div>
         </a>
         <a href="./sites/thesis/index.html">
@@ -50,9 +50,58 @@
 </template>
 
 <script setup>
-import '/pages/code/code.css';
 </script>
 
 <style scoped>
-.container { padding-top: 60px; }
+.container {
+    max-width: 100%;
+    padding-top: 60px;
+    margin: 0;
+}
+
+.wrapper {
+    padding: 0;
+    margin: 0;
+}
+
+.grid {
+    padding-top: 100px;
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 20px;
+    row-gap: 40px;
+    box-sizing: border-box;
+    max-width: 80%;
+    margin: 0 auto;
+}
+.grid a, .grid a:hover {
+    text-decoration: none;
+    color: inherit;
+}
+.grid-item {
+    box-shadow: 0px 0px 5px 0px;
+    text-align: center;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    width: 200px;
+    height: 200px;
+}
+
+.grid-item:hover {
+    box-shadow: 0px 0px 15px 5px rgba(0, 0, 0, 0.2);
+    transition: all 2s ease;
+    transform: scale(1.05);
+}
+
+.grid-item img {
+    width: 100%;
+    height: auto;
+    max-width: 200px; 
+}
+
+.grid-item h1 {
+    margin: 10px 0 0 0;
+    font-size: 1.2em;
+}
 </style>

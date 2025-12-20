@@ -1,6 +1,6 @@
 // nav-menu.js
-import rawHTML from './index.html?raw';
-import rawCSS from  './nav-menu.css?raw';
+import rawHTML from '/components/nav-menu/index.html?raw';
+import rawCSS from  '/components/nav-menu/nav-menu.css?raw';
 
 class NavMenu extends HTMLElement {
   constructor() {

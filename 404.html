@@ -3,6 +3,10 @@
 <head>
     <title>404 - Page Not Found</title>
     <link rel="stylesheet" href="/styles.css">
+    <script type="module">
+      import { injectHeadTags } from '/utils/head/inject-head.js';
+      injectHeadTags();
+    </script>
     <style>
       body { background: #fff; color: #333; font-family: Arial, sans-serif; text-align: center; padding-top: 100px; }
       h1 { font-size: 48px; margin-bottom: 20px; }

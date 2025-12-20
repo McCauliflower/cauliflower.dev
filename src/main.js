@@ -5,7 +5,7 @@ import { createAuth0 } from '@auth0/auth0-vue';
 
 // import global styles from project root
 import '../styles.css';
-import '../reset.css';
+import '/assets/reset.css';
 
 createApp(App)
     .use(router)

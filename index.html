@@ -7,23 +7,13 @@
     <body>
         <!-- Vue will mount here -->
         <div id="app"></div>
-
-        <!-- Three.js and other global libs (kept for now) -->
-        <script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js"></script>
-        <script src="/lib/perlin.js"></script>
-        <script src="/lib/three.js"></script>
-        <script src="/lib/OrbitControls.js"></script>
-
         <!-- Vue entry (Vite will serve this) -->
         <script type="module" src="/src/main.js"></script>
 
-        <!-- Three.js scene initialization (global, runs after three.js libs are loaded) -->
-        <script src="/scene.js"></script>
-
         <link rel="stylesheet" href="/styles.css">
-        <link rel="stylesheet" href="/reset.css">
+        <link rel="stylesheet" href="/assets/reset.css">
     </body>
 
     <!-- keep head injection for now (may be migrated later) -->
-    <script type="module" src="/components/head/inject-head.js"></script>
+    <script type="module" src="/utils/head/inject-head.js"></script>
 </html>

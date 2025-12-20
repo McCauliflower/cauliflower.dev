@@ -6,7 +6,7 @@
 </template>
 
 <script setup>
-import NavMenu from './components/NavMenu.vue';
+import NavMenu from '/src/components/NavMenu.vue';
 </script>
 
 <style>

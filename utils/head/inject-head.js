@@ -1,9 +1,7 @@
 // inject-head.js
 // This script injects meta, link, and title tags into document.head
 
-document.title = "cauliflower.dev";
-
-const tags = [
+export const getHeadTags = () => [
   { tag: 'meta', attrs: { charset: 'UTF-8' } },
   { tag: 'meta', attrs: { name: 'viewport', content: 'width=device-width, initial-scale=1.0' } },
   { tag: 'meta', attrs: { name: 'description', content: 'Art, code, and creative technology by cauliflower. Explore projects, experiments, and resources for developers and artists.' } },
@@ -29,10 +27,16 @@ const tags = [
   { tag: 'meta', attrs: { 'http-equiv': 'X-UA-Compatible', content: 'IE=edge' } },
 ];
 
-tags.forEach(({ tag, attrs }) => {
-  const el = document.createElement(tag);
-  Object.entries(attrs).forEach(([key, value]) => {
-    if (value !== undefined) el.setAttribute(key, value);
+export const injectHeadTags = () => {
+  const tags = getHeadTags();
+  tags.forEach(({ tag, attrs }) => {
+    const el = document.createElement(tag);
+    Object.entries(attrs).forEach(([key, value]) => {
+      if (value !== undefined) el.setAttribute(key, value);
+    });
+    document.head.appendChild(el);
   });
-  document.head.appendChild(el);
-});
+};
+
+document.title = "cauliflower.dev";
+injectHeadTags();
