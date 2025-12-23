@@ -1,6 +1,6 @@
 <template>
   <main class="auth-shell">
-    <section v-if="!isAuthenticated"class="card" aria-live="polite">
+    <section v-if="!isAuthenticated" class="card" aria-live="polite">
       <header class="card__header">
         <h1 class="card__title">Welcome back</h1>
         <p class="card__subtitle">Sign in to access your account.</p>
@@ -82,6 +82,14 @@ onMounted(() => {
 /* minimal spacing to account for fixed nav */
 .auth-shell { 
   padding-top: 60px; 
+}
+
+.auth-shell .card{
+  position: relative;
+}
+
+.auth-shell .profile-card{
+  position: relative;
 }
 
 .profile-card {
@@ -174,33 +182,12 @@ onMounted(() => {
   display: flex;
   gap: 10px;
 }
-
-.btn-logout,
-.btn-login {
-  padding: 10px 20px;
-  border: none;
-  border-radius: 4px;
-  cursor: pointer;
-  font-size: 14px;
-  font-weight: 600;
-  transition: background-color 0.2s;
+.card{
+  padding: 2rem;
+  color: black;
+  margin-top: 10vh;
 }
-
-.btn-logout {
-  background-color: #dc3545;
-  color: white;
-}
-
-.btn-logout:hover {
-  background-color: #c82333;
-}
-
-.btn-login {
-  background-color: #007bff;
-  color: white;
-}
-
-.btn-login:hover {
-  background-color: #0056b3;
+.card h1{
+  color: black;
 }
 </style>

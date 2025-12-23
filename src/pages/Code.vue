@@ -1,107 +1,160 @@
 <template>
-  <div class="container">
-    <div class="wrapper">
-      <div class="grid">
-        <a href="./sites/robot-builder/index.html">
-          <div class="grid-item">
-            <img class="image" src="/assets/images/code_thumnails/robot-builder-thumb.png" alt="Robot Builder" />
-            <div class="image-label">Robot Builder</div>
-          </div>
-        </a>
-        <a href="./sites/unicode-hieroglyphs/unicodeLoop.html">
-          <div class="grid-item">
-            <img class="image" src="/assets/images/code_thumnails/unicode-thumb.png" alt="Unicode Hieroglyphs" />
-            <div class="image-label">Unicode Hieroglyphs</div>
-          </div>
-        </a>
-        <a href="./sites/tree-fractal/index.html">
-          <div class="grid-item">
-            <img class="image" src="/assets/images/code_thumnails/tree-fractal-thumb.png" alt="Tree Fractal" />
-            <div class="image-label">Tree Fractal</div>
-          </div>
-        </a>
-        <a href="./sites/snake/index.html">
-          <div class="grid-item">
-            <img class="image" src="/assets/images/code_thumnails/snake-thumb.png" alt="Snake" />
-            <div class="image-label">Snake</div>
-          </div>
-        </a>
-        <a href="./sites/divz/index.html">
-          <div class="grid-item">
-            <img class="image" src="/assets/images/code_thumnails/sun-shades-thumb.png" alt="Divz" />
-            <div class="image-label">Divz</div>
-          </div>
-        </a>
-        <a href="./sites/thesis/index.html">
-          <div class="grid-item">
-            <img class="image" src="/assets/images/code_thumnails/thesis-thumb.png" alt="Thesis" />
-            <div class="image-label">Thesis</div>
-          </div>
-        </a>
-        <a href="./sites/ballpit/index.html">
-          <div class="grid-item">
-            <img class="image" src="/assets/images/code_thumnails/ballpit-thumb.png" alt="Ballpit" />
-            <div class="image-label">Ballpit</div>
-          </div>
-        </a>
+  <div class="code-page-container">
+    <div class="controls">
+      <button class="control-btn" @click="toggleAnimation()">⏸️ Pause</button>
+      <button class="control-btn" @click="resetPosition()">🔄 Reset</button>
+      <button class="control-btn" @click="changeDirection()">
+        ↔️ Direction
+      </button>
+    </div>
+
+    <!-- <div class="speed-indicator">
+      Speed: <input ref="speedValue" type="number" value="120"> px/s
+    </div> -->
+    <input ref="speedValue" type="number" value="120">
+
+    <div class="container">
+      <canvas ref="particleCanvas" id="particleCanvas"></canvas>
+      <canvas ref="scannerCanvas" id="scannerCanvas"></canvas>
+
+      <div class="scanner"></div>
+
+      <div class="card-stream" ref="cardStream">
+        <div class="card-line" ref="cardLine"></div>
       </div>
     </div>
   </div>
 </template>
 
-<script setup>
+
+<style scoped lang="css">
+@import "./CodeDependencies/CodeAnimation.css";
+
+.code-page-container {
+  background: #000000 !important;
+  font-family: 'Iceberg', Arial, sans-serif;
+  text-transform: uppercase;
+  min-height: 100vh;
+  overflow: hidden;
+  position: relative;
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+</style>
+
+<script setup lang="js">
+import { ref, onMounted, onBeforeUnmount } from 'vue';
+import { loadScript } from '../../utils/generalUtils';
+import { CardStreamController } from './CodeDependencies/CardStreamController.js';
+import { ParticleSystem } from './CodeDependencies/particleSystem.js';
+import { ParticleScanner } from './CodeDependencies/particleScanner.js';
+
+// Template refs
+const speedValue = ref(null);
+const cardStream = ref(null);
+const cardLine = ref(null);
+const particleCanvas = ref(null);
+const scannerCanvas = ref(null);
+
+// Controller instances
+let cardStreamController = null;
+let particleSystem = null;
+let particleScanner = null;
+
+// Vue component methods
+function toggleAnimation() {
+  if (cardStreamController) {
+    cardStreamController.toggleAnimation();
+  }
+}
+
+function resetPosition() {
+  if (cardStreamController) {
+    cardStreamController.resetPosition();
+  }
+}
+
+function changeDirection() {
+  if (cardStreamController) {
+    cardStreamController.changeDirection();
+  }
+}
+
+const projects = [
+  {
+    title: "Robot Builder",
+    image: "/assets/images/code_thumnails/robot-builder-thumb.png",
+    link: "/src/pages/sites/robot-builder/index.html",
+  },
+  {
+    title: "Unicode Hieroglyphs",
+    image: "/assets/images/code_thumnails/unicode-thumb.png",
+    link: "/src/pages/sites/unicode-hieroglyphs/unicodeLoop.html",
+  },
+  {
+    title: "Tree Fractal",
+    image: "/assets/images/code_thumnails/tree-fractal-thumb.png",
+    link: "/src/pages/sites/tree-fractal/index.html",
+  },
+  {
+    title: "Snake",
+    image: "/assets/images/code_thumnails/snake-thumb.png",
+    link: "/src/pages/sites/snake/index.html",
+  },
+  {
+    title: "Divz",
+    image: "/assets/images/code_thumnails/sun-shades-thumb.png",
+    link: "/src/pages/sites/divz/index.html",
+  },
+  {
+    title: "Thesis",
+    image: "/assets/images/code_thumnails/thesis-thumb.png",
+    link: "/src/pages/sites/thesis/index.html",
+  },
+  {
+    title: "Ballpit",
+    image: "/assets/images/code_thumnails/ballpit-thumb.png",
+    link: "/src/pages/sites/ballpit/index.html",
+  },
+];
+onMounted(async () => {
+  await loadScript('https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js');
+  
+  cardStreamController = new CardStreamController(
+    cardStream.value,
+    cardLine.value,
+    speedValue.value,
+    projects
+  );
+  particleSystem = new ParticleSystem(particleCanvas.value);
+  particleScanner = new ParticleScanner(scannerCanvas.value);
+
+  window.setScannerScanning = (active) => {
+    if (particleScanner) {
+      particleScanner.setScanningActive(active);
+    }
+  };
+
+  window.getScannerStats = () => {
+    if (particleScanner) {
+      return particleScanner.getStats();
+    }
+    return null;
+  };
+});
+
+onBeforeUnmount(() => {
+  if (cardStreamController) {
+    cardStreamController.destroy();
+  }
+  if (particleSystem) {
+    particleSystem.destroy();
+  }
+  if (particleScanner) {
+    particleScanner.destroy();
+  }
+});
 </script>
 
-<style scoped>
-.container {
-    max-width: 100%;
-    padding-top: 60px;
-    margin: 0;
-}
-
-.wrapper {
-    padding: 0;
-    margin: 0;
-}
-
-.grid {
-    padding-top: 100px;
-    display: grid;
-    grid-template-columns: repeat(4, 1fr);
-    gap: 20px;
-    row-gap: 40px;
-    box-sizing: border-box;
-    max-width: 80%;
-    margin: 0 auto;
-}
-.grid a, .grid a:hover {
-    text-decoration: none;
-    color: inherit;
-}
-.grid-item {
-    box-shadow: 0px 0px 5px 0px;
-    text-align: center;
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    width: 200px;
-    height: 200px;
-}
-
-.grid-item:hover {
-    box-shadow: 0px 0px 15px 5px rgba(0, 0, 0, 0.2);
-    transition: all 2s ease;
-    transform: scale(1.05);
-}
-
-.grid-item img {
-    width: 100%;
-    height: auto;
-    max-width: 200px; 
-}
-
-.grid-item h1 {
-    margin: 10px 0 0 0;
-    font-size: 1.2em;
-}
-</style>
