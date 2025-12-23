@@ -6,7 +6,7 @@
 
 <script setup>
 import { onMounted } from 'vue';
-import { loadScript } from '@/utils/generalUtils.js';
+import { loadScript } from '/utils/generalUtils.js';
 
 onMounted(async () => {
   try {

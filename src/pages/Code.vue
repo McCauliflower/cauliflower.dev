@@ -31,7 +31,7 @@
 </style>
 
 <script setup lang="js">
-import { ref, onMounted, onBeforeUnmount } from 'vue';
+import { ref, onMounted, onBeforeUnmount, onBeforeMount } from 'vue';
 import { loadScript } from '../../utils/generalUtils';
 
 // Template refs
@@ -364,24 +364,70 @@ class CardStreamController {
   }
 
   createCardWrapper(index) {
+    const projects = [
+      {
+        title: "Robot Builder",
+        image: "/assets/images/code_thumnails/robot-builder-thumb.png",
+        link: "/src/pages/sites/robot-builder/index.html",
+      },
+      {
+        title: "Unicode Hieroglyphs",
+        image: "/assets/images/code_thumnails/unicode-thumb.png",
+        link: "/src/pages/sites/unicode-hieroglyphs/unicodeLoop.html",
+      },
+      {
+        title: "Tree Fractal",
+        image: "/assets/images/code_thumnails/tree-fractal-thumb.png",
+        link: "/src/pages/sites/tree-fractal/index.html",
+      },
+      {
+        title: "Snake",
+        image: "/assets/images/code_thumnails/snake-thumb.png",
+        link: "/src/pages/sites/snake/index.html",
+      },
+      {
+        title: "Divz",
+        image: "/assets/images/code_thumnails/sun-shades-thumb.png",
+        link: "/src/pages/sites/divz/index.html",
+      },
+      {
+        title: "Thesis",
+        image: "/assets/images/code_thumnails/thesis-thumb.png",
+        link: "/src/pages/sites/thesis/index.html",
+      },
+      {
+        title: "Ballpit",
+        image: "/assets/images/code_thumnails/ballpit-thumb.png",
+        link: "/src/pages/sites/ballpit/index.html",
+      },
+    ];
+
+    const project = projects[index % projects.length];
+
     const wrapper = document.createElement("div");
     wrapper.className = "card-wrapper";
+    wrapper.style.cursor = "grab";
 
     const normalCard = document.createElement("div");
     normalCard.className = "card card-normal";
 
-    const cardImages = [
-      "https://cdn.prod.website-files.com/68789c86c8bc802d61932544/689f20b55e654d1341fb06f8_4.1.png",
-      "https://cdn.prod.website-files.com/68789c86c8bc802d61932544/689f20b5a080a31ee7154b19_1.png",
-      "https://cdn.prod.website-files.com/68789c86c8bc802d61932544/689f20b5c1e4919fd69672b8_3.png",
-      "https://cdn.prod.website-files.com/68789c86c8bc802d61932544/689f20b5f6a5e232e7beb4be_2.png",
-      "https://cdn.prod.website-files.com/68789c86c8bc802d61932544/689f20b5bea2f1b07392d936_4.png",
-    ];
+    // Create label overlay
+    const label = document.createElement("div");
+    label.className = "image-label";
+    label.textContent = project.title;
+    label.style.position = "absolute";
+    label.style.top = "10px";
+    label.style.left = "10px";
+    label.style.color = "white";
+    label.style.fontSize = "14px";
+    label.style.fontWeight = "bold";
+    label.style.zIndex = "10";
+    label.style.textShadow = "0 2px 4px rgba(0, 0, 0, 0.8)";
 
     const cardImage = document.createElement("img");
     cardImage.className = "card-image";
-    cardImage.src = cardImages[index % cardImages.length];
-    cardImage.alt = "Credit Card";
+    cardImage.src = project.image;
+    cardImage.alt = project.title;
 
     cardImage.onerror = () => {
       const canvas = document.createElement("canvas");
@@ -400,6 +446,7 @@ class CardStreamController {
     };
 
     normalCard.appendChild(cardImage);
+    normalCard.appendChild(label);
 
     const asciiCard = document.createElement("div");
     asciiCard.className = "card card-ascii";
@@ -416,6 +463,15 @@ class CardStreamController {
     asciiCard.appendChild(asciiContent);
     wrapper.appendChild(normalCard);
     wrapper.appendChild(asciiCard);
+
+    // Add double-click handler for navigation
+    wrapper.addEventListener("dblclick", (e) => {
+      e.stopPropagation();
+      // Navigate directly with full path to preserve .html extension
+      // Using window.location ensures the exact URL specified is used
+      const absolutePath = window.location.origin + project.link;
+      window.location.href = absolutePath;
+    });
 
     return wrapper;
   }
@@ -1206,12 +1262,11 @@ function changeDirection() {
     cardStreamController.changeDirection();
   }
 }
-beforeMount(() => {
-  try {
-    await loadScript('https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js');
-  } catch (error) {
-    console.error('Error loading scripts:', error);
-  }
+onBeforeMount(() => {
+  loadScript('https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js')
+  .catch((error) => {
+    console.error('Error loading Three.js:', error);
+  });
 });
 
 onMounted(() => {

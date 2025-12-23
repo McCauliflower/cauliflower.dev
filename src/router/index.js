@@ -13,6 +13,14 @@ const routes = [
   { path: '/art', component: Art },
   { path: '/code', component: Code },
   { path: '/auth', component: Auth },
+  // Project site routes - direct HTML file access
+  { path: '/src/pages/sites/robot-builder/index.html', component: () => {} },
+  { path: '/src/pages/sites/unicode-hieroglyphs/unicodeLoop.html', component: () => {} },
+  { path: '/src/pages/sites/tree-fractal/index.html', component: () => {} },
+  { path: '/src/pages/sites/snake/index.html', component: () => {} },
+  { path: '/src/pages/sites/divz/index.html', component: () => {} },
+  { path: '/src/pages/sites/thesis/index.html', component: () => {} },
+  { path: '/src/pages/sites/ballpit/index.html', component: () => {} },
   { path: '/:pathMatch(.*)*', component: NotFound },
 ];
 
