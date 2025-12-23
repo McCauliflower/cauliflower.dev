@@ -21,14 +21,6 @@ body {
     cursor: url('assets/cursor/transparent-rainbow-cursor.cur'), auto;
 }
 
-h1 {
-    position: absolute;
-    top: 20px;
-    left: 20px;
-    color: white;
-    z-index: 1;
-}
-
 .container {
     margin-top: 0;
     position: relative;
