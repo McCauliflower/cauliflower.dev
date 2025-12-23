@@ -1,22 +1,22 @@
 {
   "name": "cauliflower.dev",
-  "version": "1.1.0",
+  "version": "1.2.0",
   "main": "index.js",
   "repository": "git@github.com:McCauliflower/cauliflower.dev.git",
   "license": "MIT",
   "scripts": {
-  "build": "vite build",
-  "preview": "vite preview",
-  "dev": "vite",
-  "dev:vite": "vite",
-  "kill": "pkill -f vite"
+    "build": "vite build",
+    "preview": "vite preview",
+    "dev": "vite",
+    "dev:vite": "vite",
+    "kill": "pkill -f vite"
   },
   "dependencies": {
     "@auth0/auth0-vue": "^2.5.0",
     "connect-history-api-fallback": "~2.0.0",
     "navigo": "~8.11.1",
     "page": "~1.11.6",
-  "vite": "^5.0.0",
+    "vite": "^5.0.0",
     "vue": "^3.3.4",
     "vue-router": "^4.2.2"
   },
