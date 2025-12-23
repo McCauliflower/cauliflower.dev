@@ -11,7 +11,7 @@
     <!-- <div class="speed-indicator">
       Speed: <input ref="speedValue" type="number" value="120"> px/s
     </div> -->
-    <input ref="speedValue" type="number" value="120">
+    <input style="display: none" ref="speedValue" type="number" value="120">
 
     <div class="container">
       <canvas ref="particleCanvas" id="particleCanvas"></canvas>
