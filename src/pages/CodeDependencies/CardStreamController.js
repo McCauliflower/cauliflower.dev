@@ -1,8 +1,9 @@
-export default class CardStreamController {
-  constructor(containerElement, cardLineElement, speedCallback) {
-    this.container = containerElement;
-    this.cardLine = cardLineElement;
-    this.speedIndicator = speedCallback
+export class CardStreamController {
+  constructor(container, cardLine, speedIndicator, projects) {
+    this.container = container;
+    this.cardLine = cardLine;
+    this.speedIndicator = speedIndicator;
+    this.projects = projects;
 
     this.position = 0;
     this.velocity = 120;
@@ -19,16 +20,14 @@ export default class CardStreamController {
     this.containerWidth = 0;
     this.cardLineWidth = 0;
 
+    this.animationFrameId = null;
+    this.updateIntervalId = null;
+    this.resizeListener = null;
+
     this.init();
   }
 
   init() {
-    // Ensure the cardLine element is ready
-    if (!this.cardLine || !this.cardLine.parentNode) {
-      console.error('CardLine element not ready');
-      return;
-    }
-    
     this.populateCardLine();
     this.calculateDimensions();
     this.setupEventListeners();
@@ -64,7 +63,8 @@ export default class CardStreamController {
     this.cardLine.addEventListener("selectstart", (e) => e.preventDefault());
     this.cardLine.addEventListener("dragstart", (e) => e.preventDefault());
 
-    window.addEventListener("resize", () => this.calculateDimensions());
+    this.resizeListener = () => this.calculateDimensions();
+    window.addEventListener("resize", this.resizeListener);
   }
 
   startDrag(e) {
@@ -138,7 +138,7 @@ export default class CardStreamController {
       this.updateSpeedIndicator();
     }
 
-    requestAnimationFrame(() => this.animate());
+    this.animationFrameId = requestAnimationFrame(() => this.animate());
   }
 
   updateCardPosition() {
@@ -156,15 +156,15 @@ export default class CardStreamController {
   }
 
   updateSpeedIndicator() {
-    if (this.speedCallback) {
-      this.speedCallback(Math.round(this.velocity));
-    }
+    this.speedIndicator.textContent = Math.round(this.velocity);
   }
 
   toggleAnimation() {
     this.isAnimating = !this.isAnimating;
     const btn = document.querySelector(".control-btn");
-    btn.textContent = this.isAnimating ? "⏸️ Pause" : "▶️ Play";
+    if (btn) {
+      btn.textContent = this.isAnimating ? "⏸️ Pause" : "▶️ Play";
+    }
 
     if (this.isAnimating) {
       this.cardLine.style.animation = "none";
@@ -185,7 +185,9 @@ export default class CardStreamController {
     this.updateSpeedIndicator();
 
     const btn = document.querySelector(".control-btn");
-    btn.textContent = "⏸️ Pause";
+    if (btn) {
+      btn.textContent = "⏸️ Pause";
+    }
   }
 
   changeDirection() {
@@ -210,7 +212,7 @@ export default class CardStreamController {
     const pick = (arr) => arr[randInt(0, arr.length - 1)];
 
     const header = [
-      "// compiled preview • scanner demo",
+      "// cauliflower.dev",
       "/* generated for visual effect – not executed */",
       "const SCAN_WIDTH = 8;",
       "const FADE_ZONE = 35;",
@@ -315,24 +317,32 @@ export default class CardStreamController {
   }
 
   createCardWrapper(index) {
+    const project = this.projects[index % this.projects.length];
+
     const wrapper = document.createElement("div");
     wrapper.className = "card-wrapper";
+    wrapper.style.cursor = "grab";
 
     const normalCard = document.createElement("div");
     normalCard.className = "card card-normal";
 
-    const cardImages = [
-      "https://cdn.prod.website-files.com/68789c86c8bc802d61932544/689f20b55e654d1341fb06f8_4.1.png",
-      "https://cdn.prod.website-files.com/68789c86c8bc802d61932544/689f20b5a080a31ee7154b19_1.png",
-      "https://cdn.prod.website-files.com/68789c86c8bc802d61932544/689f20b5c1e4919fd69672b8_3.png",
-      "https://cdn.prod.website-files.com/68789c86c8bc802d61932544/689f20b5f6a5e232e7beb4be_2.png",
-      "https://cdn.prod.website-files.com/68789c86c8bc802d61932544/689f20b5bea2f1b07392d936_4.png",
-    ];
+    // Create label overlay
+    const label = document.createElement("div");
+    label.className = "image-label";
+    label.textContent = project.title;
+    label.style.position = "absolute";
+    label.style.top = "10px";
+    label.style.left = "10px";
+    label.style.color = "white";
+    label.style.fontSize = "14px";
+    label.style.fontWeight = "bold";
+    label.style.zIndex = "10";
+    label.style.textShadow = "0 2px 4px rgba(0, 0, 0, 0.8)";
 
     const cardImage = document.createElement("img");
     cardImage.className = "card-image";
-    cardImage.src = cardImages[index % cardImages.length];
-    cardImage.alt = "Credit Card";
+    cardImage.src = project.image;
+    cardImage.alt = project.title;
 
     cardImage.onerror = () => {
       const canvas = document.createElement("canvas");
@@ -351,6 +361,7 @@ export default class CardStreamController {
     };
 
     normalCard.appendChild(cardImage);
+    normalCard.appendChild(label);
 
     const asciiCard = document.createElement("div");
     asciiCard.className = "card card-ascii";
@@ -367,6 +378,15 @@ export default class CardStreamController {
     asciiCard.appendChild(asciiContent);
     wrapper.appendChild(normalCard);
     wrapper.appendChild(asciiCard);
+
+    // Add double-click handler for navigation
+    wrapper.addEventListener("dblclick", (e) => {
+      e.stopPropagation();
+      // Navigate directly with full path to preserve .html extension
+      // Using window.location ensures the exact URL specified is used
+      const absolutePath = window.location.origin + project.link;
+      window.location.href = absolutePath;
+    });
 
     return wrapper;
   }
@@ -431,7 +451,7 @@ export default class CardStreamController {
 
   updateAsciiContent() {
     document.querySelectorAll(".ascii-content").forEach((content) => {
-      if (Math.random() < 0.4) {
+      if (Math.random() < 0.15) {
         const { width, height } = this.calculateCodeDimensions(400, 250);
         content.textContent = this.generateCode(width, height);
       }
@@ -440,7 +460,7 @@ export default class CardStreamController {
 
   populateCardLine() {
     this.cardLine.innerHTML = "";
-    const cardsCount = 30;
+    const cardsCount = 7;
     for (let i = 0; i < cardsCount; i++) {
       const cardWrapper = this.createCardWrapper(i);
       this.cardLine.appendChild(cardWrapper);
@@ -448,14 +468,30 @@ export default class CardStreamController {
   }
 
   startPeriodicUpdates() {
-    setInterval(() => {
+    this.updateIntervalId = setInterval(() => {
       this.updateAsciiContent();
-    }, 50);
+    }, 200);
 
     const updateClipping = () => {
       this.updateCardClipping();
       requestAnimationFrame(updateClipping);
     };
     updateClipping();
+  }
+
+  destroy() {
+    if (this.animationFrameId) {
+      cancelAnimationFrame(this.animationFrameId);
+    }
+    if (this.updateIntervalId) {
+      clearInterval(this.updateIntervalId);
+    }
+    if (this.resizeListener) {
+      window.removeEventListener("resize", this.resizeListener);
+    }
+    document.removeEventListener("mousemove", (e) => this.onDrag(e));
+    document.removeEventListener("mouseup", () => this.endDrag());
+    document.removeEventListener("touchmove", (e) => this.onDrag(e.touches[0]));
+    document.removeEventListener("touchend", () => this.endDrag());
   }
 }

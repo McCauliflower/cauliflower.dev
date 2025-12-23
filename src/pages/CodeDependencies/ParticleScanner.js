@@ -1,22 +1,7 @@
-
-export default class ParticleScanner {
-  constructor(THREE, canvasElement) {
-    this.THREE = THREE;
-    this.canvas = canvasElement;
-    
-    // Guard against missing canvas
-    if (!this.canvas) {
-      console.error('ParticleScanner: Canvas element not provided');
-      return;
-    }
-    
+export class ParticleScanner {
+  constructor(canvas) {
+    this.canvas = canvas;
     this.ctx = this.canvas.getContext("2d");
-    
-    if (!this.ctx) {
-      console.error('ParticleScanner: Could not get 2D context from canvas');
-      return;
-    }
-    
     this.animationId = null;
 
     this.w = window.innerWidth;
@@ -44,12 +29,15 @@ export default class ParticleScanner {
     this.currentFadeZone = this.fadeZone;
     this.transitionSpeed = 0.05;
 
+    this.resizeListener = null;
+
     this.setupCanvas();
     this.createGradientCache();
     this.initParticles();
     this.animate();
 
-    window.addEventListener("resize", () => this.onResize());
+    this.resizeListener = () => this.onResize();
+    window.addEventListener("resize", this.resizeListener);
   }
 
   setupCanvas() {
@@ -436,7 +424,6 @@ export default class ParticleScanner {
 
   startScanning() {
     this.scanningActive = true;
-    console.log("Scanning started - intense particle mode activated");
   }
 
   stopScanning() {
@@ -446,7 +433,6 @@ export default class ParticleScanner {
 
   setScanningActive(active) {
     this.scanningActive = active;
-    console.log("Scanning mode:", active ? "active" : "inactive");
   }
 
   getStats() {
@@ -469,5 +455,9 @@ export default class ParticleScanner {
 
     this.particles = [];
     this.count = 0;
+    
+    if (this.resizeListener) {
+      window.removeEventListener("resize", this.resizeListener);
+    }
   }
 }

@@ -1,23 +1,18 @@
-export default class ParticleSystem {
-  constructor(THREE, canvasElement) {
-    this.THREE = THREE;
+export class ParticleSystem {
+  constructor(canvas) {
     this.scene = null;
     this.camera = null;
     this.renderer = null;
     this.particles = null;
     this.particleCount = 400;
-    this.canvas = canvasElement;
+    this.canvas = canvas;
+    this.animationFrameId = null;
+    this.resizeListener = null;
 
     this.init();
   }
 
   init() {
-    // Ensure canvas element exists
-    if (!this.canvas) {
-      console.error('Canvas element not found');
-      return;
-    }
-
     this.scene = new THREE.Scene();
 
     this.camera = new THREE.OrthographicCamera(
@@ -42,7 +37,8 @@ export default class ParticleSystem {
 
     this.animate();
 
-    window.addEventListener("resize", () => this.onWindowResize());
+    this.resizeListener = () => this.onWindowResize();
+    window.addEventListener("resize", this.resizeListener);
   }
 
   createParticles() {
@@ -140,7 +136,7 @@ export default class ParticleSystem {
   }
 
   animate() {
-    requestAnimationFrame(() => this.animate());
+    this.animationFrameId = requestAnimationFrame(() => this.animate());
 
     if (this.particles) {
       const positions = this.particles.geometry.attributes.position.array;
@@ -183,6 +179,12 @@ export default class ParticleSystem {
   }
 
   destroy() {
+    if (this.animationFrameId) {
+      cancelAnimationFrame(this.animationFrameId);
+    }
+    if (this.resizeListener) {
+      window.removeEventListener("resize", this.resizeListener);
+    }
     if (this.renderer) {
       this.renderer.dispose();
     }
@@ -193,4 +195,3 @@ export default class ParticleSystem {
     }
   }
 }
-
