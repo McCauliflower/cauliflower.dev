@@ -1,9 +1,8 @@
 export default class CardStreamController {
-   constructor(THREE, cardSteamRef, cardLineRef, speedIndicatorRef) {
-    this.THREE = THREE;
-    this.container = cardSteamRef
-    this.cardLine = cardLineRef
-    this.speedIndicator = speedIndicatorRef
+  constructor(containerElement, cardLineElement, speedCallback) {
+    this.container = containerElement;
+    this.cardLine = cardLineElement;
+    this.speedIndicator = speedCallback
 
     this.position = 0;
     this.velocity = 120;
@@ -24,6 +23,12 @@ export default class CardStreamController {
   }
 
   init() {
+    // Ensure the cardLine element is ready
+    if (!this.cardLine || !this.cardLine.parentNode) {
+      console.error('CardLine element not ready');
+      return;
+    }
+    
     this.populateCardLine();
     this.calculateDimensions();
     this.setupEventListeners();
@@ -151,7 +156,9 @@ export default class CardStreamController {
   }
 
   updateSpeedIndicator() {
-    this.speedIndicator.textContent = Math.round(this.velocity);
+    if (this.speedCallback) {
+      this.speedCallback(Math.round(this.velocity));
+    }
   }
 
   toggleAnimation() {
@@ -424,7 +431,7 @@ export default class CardStreamController {
 
   updateAsciiContent() {
     document.querySelectorAll(".ascii-content").forEach((content) => {
-      if (Math.random() < 0.15) {
+      if (Math.random() < 0.4) {
         const { width, height } = this.calculateCodeDimensions(400, 250);
         content.textContent = this.generateCode(width, height);
       }
@@ -443,7 +450,7 @@ export default class CardStreamController {
   startPeriodicUpdates() {
     setInterval(() => {
       this.updateAsciiContent();
-    }, 200);
+    }, 50);
 
     const updateClipping = () => {
       this.updateCardClipping();

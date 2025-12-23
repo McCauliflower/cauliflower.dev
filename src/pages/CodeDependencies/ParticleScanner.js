@@ -1,9 +1,22 @@
 
 export default class ParticleScanner {
-   constructor(THREE, particleCanvasRef) {
+  constructor(THREE, canvasElement) {
     this.THREE = THREE;
-    this.canvas = particleCanvasRef;
+    this.canvas = canvasElement;
+    
+    // Guard against missing canvas
+    if (!this.canvas) {
+      console.error('ParticleScanner: Canvas element not provided');
+      return;
+    }
+    
     this.ctx = this.canvas.getContext("2d");
+    
+    if (!this.ctx) {
+      console.error('ParticleScanner: Could not get 2D context from canvas');
+      return;
+    }
+    
     this.animationId = null;
 
     this.w = window.innerWidth;

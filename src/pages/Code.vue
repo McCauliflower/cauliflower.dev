@@ -1,15 +1,15 @@
 <template>
-  <div class="container">
+  <div>
     <div class="controls">
-      <button class="control-btn" onclick="toggleAnimation()">⏸️ Pause</button>
-      <button class="control-btn" onclick="resetPosition()">🔄 Reset</button>
-      <button class="control-btn" onclick="changeDirection()">
+      <button class="control-btn" @click="toggleAnimation">⏸️ Pause</button>
+      <button class="control-btn" @click="resetPosition">🔄 Reset</button>
+      <button class="control-btn" @click="changeDirection">
         ↔️ Direction
       </button>
     </div>
 
-    <div class="speed-indicator" ref="speedIndicator">
-      Speed: <span id="speedValue">120</span> px/s
+    <div class="speed-indicator">
+      Speed: <span>{{ speedIndicatorRef }}</span> px/s
     </div>
 
     <div class="container">
@@ -18,11 +18,10 @@
 
       <div class="scanner"></div>
 
-      <div class="card-stream" ref="cardStream" id="cardStream">
-        <div class="card-line" ref="cardLine" id="cardLine"></div>
+      <div class="card-stream" ref="cardStreamRef" id="cardStream">
+        <div class="card-line" ref="cardLineRef" id="cardLine"></div>
       </div>
     </div>
-
 
     <!-- <div class="wrapper">
       <div class="grid">
@@ -119,7 +118,9 @@ const loadScript = (src) => {
   return new Promise((resolve, reject) => {
     const script = document.createElement('script');
     script.src = src;
-    script.onload = resolve;
+    script.onload = () => {
+      resolve(window.THREE);
+    };
     script.onerror = reject;
     document.head.appendChild(script);
   });
@@ -127,18 +128,31 @@ const loadScript = (src) => {
 
 // Lifecycle hooks
 onMounted(async () => {
+  // Wait for refs to be attached to DOM elements
+  await new Promise(resolve => setTimeout(resolve, 0));
+  
   try {
+      console.log('Code.vue mounted, loading THREE.js...');
       const THREE = await loadScript('https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js');
+      console.log('THREE.js loaded:', !!THREE);
+      
+      console.log('Creating CardStreamController...');
       cardStream = new CardStreamController(
-      cardStreamRef.value,
-      cardLineRef.value,
-      (newSpeed) => {
-        speedIndicatorRef.value = newSpeed;
-      }
-    );
+        cardStreamRef.value,
+        cardLineRef.value,
+        (newSpeed) => {
+          speedIndicatorRef.value = newSpeed;
+        }
+      );
+      console.log('CardStreamController created');
     
-    particleSystem = new ParticleSystem(THREE, particleCanvasRef.value);
-    particleScanner = new ParticleScanner(THREE, scannerCanvasRef.value);
+      console.log('Creating ParticleSystem with canvas:', particleCanvasRef.value);
+      particleSystem = new ParticleSystem(THREE, particleCanvasRef.value);
+      console.log('ParticleSystem created');
+      
+      console.log('Creating ParticleScanner with canvas:', scannerCanvasRef.value);
+      particleScanner = new ParticleScanner(THREE, scannerCanvasRef.value);
+      console.log('ParticleScanner created');
 
     window.setScannerScanning = (active) => {
       if (particleScanner) {
@@ -152,8 +166,10 @@ onMounted(async () => {
       }
       return null;
     };
+    
+    console.log('Code.vue initialization complete');
   } catch (error) {
-    console.error('Error loading Three.js:', error);  
+    console.error('Error during Code.vue initialization:', error);  
   }
 });
 
@@ -167,7 +183,6 @@ onUnmounted(() => {
   if (particleScanner) {
     particleScanner.destroy();
   }
-  
   delete window.setScannerScanning;
   delete window.getScannerStats;
 });
@@ -177,11 +192,6 @@ onUnmounted(() => {
 <style scoped>
 @import url("https://fonts.googleapis.com/css2?family=Roboto+Mono:wght@400;500;700&display=swap");
 
-.container {
-    max-width: 100%;
-    padding-top: 60px;
-    margin: 0;
-}
 * {
   margin: 0;
   padding: 0;
@@ -256,6 +266,14 @@ body {
   position: relative;
   width: 100vw;
   height: 100vh;
+  overflow: hidden;
+}
+
+.main-container {
+  padding-top: 60px;
+  position: relative;
+  width: 100vw;
+  height: 100vh;
   display: flex;
   align-items: center;
   justify-content: center;
@@ -264,10 +282,14 @@ body {
 .card-stream {
   position: absolute;
   width: 100vw;
-  height: 180px;
+  height: 250px;
+  top: 50%;
+  left: 0;
+  transform: translateY(-50%);
   display: flex;
   align-items: center;
   overflow: visible;
+  z-index: 5;
 }
 
 .card-line {

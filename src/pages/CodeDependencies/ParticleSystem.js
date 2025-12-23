@@ -12,6 +12,12 @@ export default class ParticleSystem {
   }
 
   init() {
+    // Ensure canvas element exists
+    if (!this.canvas) {
+      console.error('Canvas element not found');
+      return;
+    }
+
     this.scene = new THREE.Scene();
 
     this.camera = new THREE.OrthographicCamera(
