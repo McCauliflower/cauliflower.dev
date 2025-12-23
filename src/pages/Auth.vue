@@ -1,6 +1,6 @@
 <template>
   <main class="auth-shell">
-    <section v-if="!isAuthenticated"class="card" aria-live="polite">
+    <section v-if="isAuthenticated ? !isAuthenticated : true" class="card" aria-live="polite">
       <header class="card__header">
         <h1 class="card__title">Welcome back</h1>
         <p class="card__subtitle">Sign in to access your account.</p>

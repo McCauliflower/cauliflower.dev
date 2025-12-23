@@ -27,12 +27,25 @@
 </template>
 
 
-<style lang="css">
+<style scoped lang="css">
 @import "./CodeDependencies/CodeAnimation.css";
+
+.code-page-container {
+  background: #000000 !important;
+  font-family: 'Iceberg', Arial, sans-serif;
+  text-transform: uppercase;
+  min-height: 100vh;
+  overflow: hidden;
+  position: relative;
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
 </style>
 
 <script setup lang="js">
-import { ref, onMounted, onBeforeUnmount, onBeforeMount } from 'vue';
+import { ref, onMounted, onBeforeUnmount } from 'vue';
 import { loadScript } from '../../utils/generalUtils';
 import { CardStreamController } from './CodeDependencies/CardStreamController.js';
 import { ParticleSystem } from './CodeDependencies/particleSystem.js';
