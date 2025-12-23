@@ -66,17 +66,17 @@ let timer = null;
 
 const current = computed(() => images[index.value]);
 
-function next() {
+const next = () => {
   index.value = (index.value + 1) % images.length;
-}
+};
 
-function prev() {
+const prev = () => {
   index.value = (index.value - 1 + images.length) % images.length;
-}
+};
 
-function go(i) {
+const go = (i) => {
   index.value = i;
-}
+};
 
 onMounted(() => {
   const app = AttractionCursor(document.getElementById('canvas'), {
