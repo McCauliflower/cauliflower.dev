@@ -44,7 +44,7 @@
 
 .speed-indicator {
   position: absolute;
-  top: 20px;
+  top: 10vh;
   right: 20px;
   color: white;
   font-size: 16px;

@@ -9,7 +9,7 @@
     </div>
 
     <div class="speed-indicator">
-      Speed: <span ref="speedValue">120</span> px/s
+      Speed: <input ref="speedValue" type="number" value="120"> px/s
     </div>
 
     <div class="container">
@@ -1205,7 +1205,6 @@ class ParticleScanner {
 
   startScanning() {
     this.scanningActive = true;
-    console.log("Scanning started - intense particle mode activated");
   }
 
   stopScanning() {
