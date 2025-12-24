@@ -43,7 +43,6 @@ const onClick = (event) => {
 const init = () => {
 	// Clear existing geometry from scene to prevent duplicates on reinit
 	scene.clear();
-	
 	// Re-add camera group if it was cleared
 	cameraGroup.clear();
 	scene.add(cameraGroup);
