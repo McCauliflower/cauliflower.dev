@@ -1,11 +1,11 @@
 import { createRouter, createWebHistory } from 'vue-router';
 
 // Use lazy-loaded Vue page components (converted from static HTML pages)
-const Home = () => import('/src/pages/Home.vue');
-const Art = () => import('/src/pages/Art.vue');
-const Code = () => import('/src/pages/Code.vue');
-const Auth = () => import('/src/pages/Auth.vue');
-const NotFound = () => import('/src/pages/NotFound.vue');
+const Home = () => import('@/pages/Home.vue');
+const Art = () => import('@/pages/Art.vue');
+const Code = () => import('@/pages/Code.vue');
+const Auth = () => import('@/pages/Auth.vue');
+const NotFound = () => import('@/pages/NotFound.vue');
 
 
 const routes = [

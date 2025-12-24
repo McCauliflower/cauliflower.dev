@@ -11,6 +11,9 @@
     </section>
     <section v-if="isAuthenticated" class="profile-card">
       <header class="profile-header">
+        <h1 class="notice">Additional functionality coming soon...</h1>
+      </header>
+      <header class="profile-header">
         <img v-if="user.picture" :src="user.picture" :alt="user.name" class="profile-avatar" />
         <div class="profile-info">
           <h1>{{ user.name }}</h1>
@@ -90,6 +93,11 @@ onMounted(() => {
 
 .auth-shell .profile-card{
   position: relative;
+}
+
+.notice {
+  text-transform: uppercase;
+  font-size: 20px;
 }
 
 .profile-card {
