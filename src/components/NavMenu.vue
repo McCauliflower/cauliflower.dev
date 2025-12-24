@@ -14,7 +14,7 @@
     <div id="login">
       <ul>
         <li>
-          <a href="#" id="three" @click.prevent="go('/auth')">LOGIN</a>
+          <a href="#" id="three" :class="{ authenticated: isAuthenticated }" @click.prevent="go('/auth')">{{ isAuthenticated ? 'PROFILE' : 'LOGIN' }}</a>
         </li>
       </ul>
     </div>
@@ -23,7 +23,9 @@
 
 <script setup>
 import { useRouter } from 'vue-router';
+import { useAuth0 } from '@auth0/auth0-vue';
 
+const { isAuthenticated } = useAuth0();
 const router = useRouter();
 function go(path) {
   router.push(path);
@@ -216,5 +218,8 @@ function go(path) {
 }
 #login>ul>li>a[id="three"]::before {
   content: "LOGIN";
+}
+#login>ul>li>a[id="three"].authenticated::before {
+  content: "PROFILE";
 }
 </style>

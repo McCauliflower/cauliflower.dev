@@ -221,7 +221,7 @@ const update = (renderer, scene, camera, clock) => {
 	// rotate camera around the origin
 	const sceneCameraGroup = scene.getObjectByName('sceneCameraGroup');
 	if (sceneCameraGroup) {
-		sceneCameraGroup.rotation.y += 0.005;
+		sceneCameraGroup.rotation.y += 0.002;
 	}
 
 	// Time-based index
@@ -252,9 +252,12 @@ function waitForContainer() {
 		scene = init();
 	} else {
 		// Container doesn't exist yet, retry in 100ms
-		setTimeout(waitForContainer, 100);
+		setTimeout(waitForContainer, 200);
 	}
 }
+
+// Export waitForContainer to window so it can be called on re-mounts
+window.waitForContainer = waitForContainer;
 
 // Start waiting for the container
 waitForContainer();

@@ -5,20 +5,25 @@
 </template>
 
 <script setup>
-import { onMounted } from 'vue';
-import { loadScript } from '/utils/generalUtils.js';
+import { onMounted, onBeforeUnmount } from 'vue';
 
 onMounted(async () => {
   try {
-    // Load Three.js from CDN first
-    await loadScript('https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js');
-    // Then load the local libraries and scene
-    await loadScript('/lib/perlin.js');
-    await loadScript('/lib/three.js');
-    await loadScript('/lib/OrbitControls.js');
-    await loadScript('/scene.js');
+    // Scripts are already loaded in index.html
+    // Just reinitialize the scene if it was previously disposed
+    if (window.waitForContainer) {
+      window.waitForContainer();
+    }
   } catch (error) {
-    console.error('Error loading scripts:', error);
+    console.error('Error initializing scene:', error);
+  }
+});
+
+onBeforeUnmount(() => {
+  // Pause animation loop but keep scene intact
+  if (window.renderer) {
+    window.renderer.dispose();
+    window.renderer = null;
   }
 });
 </script>

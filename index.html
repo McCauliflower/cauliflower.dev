@@ -3,17 +3,20 @@
 <html lang="en">
     <head>
         <title>cauliflower.dev</title>
+        <!-- Load Three.js and dependencies with defer to ensure proper load order -->
+        <script defer src="/lib/three.js"></script>
+        <script defer src="/lib/perlin.js"></script>
+        <script defer src="/lib/OrbitControls.js"></script>
+        <script defer src="/scene.js"></script>
     </head>
     <body>
-        <!-- Vue will mount here -->
         <div id="app"></div>
-        <!-- Vue entry (Vite will serve this) -->
+        <!-- Vue/Vite entry -->
         <script type="module" src="/src/main.js"></script>
 
         <link rel="stylesheet" href="/assets/reset.css">
         <link rel="stylesheet" href="/styles.css">
     </body>
 
-    <!-- keep head injection for now (may be migrated later) -->
     <script type="module" src="/utils/head/inject-head.js"></script>
 </html>
