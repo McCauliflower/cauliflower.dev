@@ -33,7 +33,6 @@ h1{
 }
 .not-found {
   box-sizing: border-box;
-  margin-top:50px;
   height: 100%;
   background-color: #000000;
   background-image: url("https://media.giphy.com/media/oEI9uBYSzLpBK/giphy.gif");

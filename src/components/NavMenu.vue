@@ -14,7 +14,7 @@
     <div id="login">
       <ul>
         <li>
-          <a href="#" id="three" :class="{ authenticated: isAuthenticated }" @click.prevent="go('/auth')">{{ isAuthenticated ? 'PROFILE' : 'LOGIN' }}</a>
+          <a href="#" id="three" :class="{ authenticated: isValidSession }" @click.prevent="go('/auth')">{{ (isValidSession) ? 'PROFILE' : 'LOGIN' }}</a>
         </li>
       </ul>
     </div>
@@ -24,9 +24,27 @@
 <script setup>
 import { useRouter } from 'vue-router';
 import { useAuth0 } from '@auth0/auth0-vue';
+import { ref, onMounted, computed } from 'vue';
 
-const { isAuthenticated } = useAuth0();
+const { isAuthenticated, getAccessTokenSilently, logout } = useAuth0();
 const router = useRouter();
+const sessionNotExpired = ref(true);
+
+const isValidSession = computed(() => {
+  return isAuthenticated.value && sessionNotExpired.value;
+});
+
+onMounted(async () => {
+  if (isAuthenticated.value) {
+    try {
+      await getAccessTokenSilently();
+    } catch (error) {
+      sessionNotExpired.value = false;
+      await logout({ logoutParams: { returnTo: window.location.origin } });
+    }
+  }
+});
+
 function go(path) {
   router.push(path);
 }

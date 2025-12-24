@@ -7,6 +7,7 @@
 
 <script setup>
 import NavMenu from '/src/components/NavMenu.vue';
+
 </script>
 
 <style>
