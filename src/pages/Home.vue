@@ -5,25 +5,13 @@
 </template>
 
 <script setup>
-import { onMounted, onBeforeUnmount } from 'vue';
+import { onMounted } from 'vue';
 
-onMounted(async () => {
-  try {
-    // Scripts are already loaded in index.html
-    // Just reinitialize the scene if it was previously disposed
-    if (window.waitForContainer) {
-      window.waitForContainer();
-    }
-  } catch (error) {
-    console.error('Error initializing scene:', error);
-  }
-});
-
-onBeforeUnmount(() => {
-  // Pause animation loop but keep scene intact
-  if (window.renderer) {
-    window.renderer.dispose();
-    window.renderer = null;
+onMounted(() => {
+  // Call waitForContainer when Home page mounts to reinitialize renderer
+  // This handles the case where we navigate away and back
+  if (window.waitForContainer) {
+    window.waitForContainer();
   }
 });
 </script>
