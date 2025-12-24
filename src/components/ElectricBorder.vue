@@ -32,7 +32,7 @@
       </defs>
     </svg>
 
-    <div class="card-container">
+    <div class="card-container" ref="cardContainer">
       <div class="inner-container">
         <div class="border-outer">
           <div class="main-card"></div>
@@ -45,7 +45,9 @@
       <div class="overlay-2"></div>
       <div class="background-glow"></div>
 
-      <slot class="content-container" />
+      <div class="content-container" ref="contentContainer">
+        <slot />
+      </div>
     </div>
   </main>
 </template>
@@ -56,27 +58,13 @@
 
 <style scoped>
 /* CSS Variables */
-:root {
+.main-container {
   --electric-border-color: #dd8448;
   --electric-light-color: oklch(from var(--electric-border-color) l c h);
   --gradient-color: oklch(
     from var(--electric-border-color) 0.3 calc(c / 2) h / 0.4
   );
-  --color-neutral-900: oklch(0.185 0 0);
-}
-
-* {
-  margin: 0;
-  padding: 0;
-  box-sizing: border-box;
-}
-
-body {
-  font-family: system-ui, -apple-system, sans-serif;
-  background-color: oklch(0.145 0 0);
-  color: oklch(0.985 0 0);
-  height: 100vh;
-  overflow: hidden;
+  --color-neutral-900: transparent(0.185 0 0);
 }
 
 /* Main container */
@@ -85,12 +73,16 @@ body {
   flex-direction: column;
   align-items: center;
   justify-content: center;
-  height: 100vh;
 }
 
 /* SVG positioning */
 .svg-container {
   position: absolute;
+}
+
+.main-card, .main-container, .svg-container, .card-container {
+  height: min(600px, 70vh) !important;
+  width: 40vw !important; 
 }
 
 /* Card container */
@@ -114,11 +106,12 @@ body {
 /* Inner container */
 .inner-container {
   position: relative;
+  z-index: 2;
 }
 
 /* Border layers */
 .border-outer {
-  border: 2px solid rgba(221, 132, 72, 0.5);
+  border: 2px solid rgba(221, 132, 72, 0.2);
   border-radius: 24px;
   padding-right: 4px;
   padding-bottom: 4px;
@@ -136,7 +129,7 @@ body {
 
 /* Glow effects */
 .glow-layer-1 {
-  border: 2px solid rgba(221, 132, 72, 0.6);
+  border: 8px solid rgba(221, 132, 72, 0.8);
   border-radius: 24px;
   width: 100%;
   height: 100%;
@@ -146,10 +139,11 @@ body {
   right: 0;
   bottom: 0;
   filter: blur(1px);
+  opacity: .2 !important;;
 }
 
 .glow-layer-2 {
-  border: 2px solid var(--electric-light-color);
+  border: 8px solid var(--electric-light-color);
   border-radius: 24px;
   width: 100%;
   height: 100%;
@@ -159,6 +153,7 @@ body {
   right: 0;
   bottom: 0;
   filter: blur(4px);
+  opacity: .2 !important;;
 }
 
 /* Overlay effects */
@@ -308,7 +303,6 @@ body {
   pointer-events: none;
 }
 
-/* Typography */
 /* .title {
   font-size: 36px;
   font-weight: 500;
@@ -317,10 +311,8 @@ body {
 
 .description {
   opacity: 0.5;
-} */
-
-/* Divider */
-/* .divider {
+}
+.divider {
   margin-top: auto;
   border: none;
   height: 1px;
@@ -332,6 +324,6 @@ body {
     transparent,
     black,
     transparent
-  ); */
-}
+  ); 
+} */
 </style>

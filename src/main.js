@@ -14,7 +14,7 @@ createApp(App)
             domain: "dev-bscikzimgp8254nw.us.auth0.com",
             clientId: import.meta.env.VITE_AUTH0_CLIENT_ID,
             authorizationParams: {
-            redirect_uri: window.location.origin
+                redirect_uri: window.location.origin
             }
         })
     )
