@@ -31,7 +31,7 @@
           </dl>
         </div>
 
-        <div class="detail-group" v-if="user.identities && user.identities.length">
+        <div class="detail-group" v-if="user.identities?.length">
           <h2>Connected Identities</h2>
           <ul>
             <li v-for="identity in user.identities" :key="identity.provider">
@@ -182,12 +182,54 @@ onMounted(() => {
   display: flex;
   gap: 10px;
 }
-.card{
+
+.card {
+  background: #fff;
+  border-radius: 8px;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
   padding: 2rem;
   color: black;
   margin-top: 10vh;
+  max-width: 400px;
+  margin-left: auto;
+  margin-right: auto;
 }
-.card h1{
+
+.card__header {
+  margin-bottom: 2rem;
+  text-align: center;
+}
+
+.card__title {
   color: black;
+  margin: 0 0 0.5rem 0;
+  font-size: 28px;
+}
+
+.card__subtitle {
+  color: #666;
+  margin: 0;
+  font-size: 14px;
+}
+
+.card button {
+  width: 100%;
+  padding: 12px;
+  background: rgb(63, 97, 40);
+  color: white;
+  border: none;
+  border-radius: 4px;
+  font-size: 16px;
+  font-weight: 600;
+  cursor: pointer;
+  transition: background 0.2s;
+}
+
+.card button:hover {
+  background: rgb(29, 45, 18);
+}
+
+.card button:active {
+  background: rgb(53, 83, 33);
 }
 </style>

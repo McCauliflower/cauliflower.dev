@@ -14,6 +14,7 @@ const routes = [
   { path: '/code', component: Code },
   { path: '/auth', component: Auth },
   // Project site routes - direct HTML file access
+  { path: '/userinfo', component: () => {} },
   { path: '/src/pages/sites/robot-builder/index.html', component: () => {} },
   { path: '/src/pages/sites/unicode-hieroglyphs/unicodeLoop.html', component: () => {} },
   { path: '/src/pages/sites/tree-fractal/index.html', component: () => {} },
@@ -25,7 +26,7 @@ const routes = [
 ];
 
 const router = createRouter({
-  history: createWebHistory(),
+  history: createWebHistory(import.meta.env.BASE_URL),
   routes,
 });
 

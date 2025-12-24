@@ -5,9 +5,11 @@
       <div class="wrapper">
           <div class="carousel">
             <button class="nav prev" @click="prev" aria-label="Previous">◀</button>
-            <div class="viewport">
-              <img :src="current.src" :alt="current.alt" class="slide" draggable="false" />
-            </div>
+              <Electric-Border>
+                <div class="viewport">
+                  <img :src="current.src" :alt="current.alt" class="slide" draggable="false" />
+                </div>
+              </Electric-Border>
             <button class="nav next" @click="next" aria-label="Next">▶</button>
           </div>
           <div class="dots">
@@ -28,7 +30,7 @@
 <script setup>
 import AttractionCursor from "https://cdn.jsdelivr.net/npm/threejs-components@0.0.26/build/cursors/attraction1.min.js"
 import { ref, computed, onMounted, onUnmounted } from 'vue';
-
+import ElectricBorder from '@/components/ElectricBorder.vue';
 // Images list copied from original page
 const images = [
   { src: '/assets/images/art_resized/Abraxas.png', alt: 'Abraxas' },
@@ -66,17 +68,17 @@ let timer = null;
 
 const current = computed(() => images[index.value]);
 
-function next() {
+const next = () => {
   index.value = (index.value + 1) % images.length;
-}
+};
 
-function prev() {
+const prev = () => {
   index.value = (index.value - 1 + images.length) % images.length;
-}
+};
 
-function go(i) {
+const go = (i) => {
   index.value = i;
-}
+};
 
 onMounted(() => {
   const app = AttractionCursor(document.getElementById('canvas'), {
@@ -122,6 +124,7 @@ onUnmounted(() => {
   justify-content:center; gap:12px; 
 }
 .viewport { 
+  padding: 30px 20px;
   height: min(600px, 70vh); 
   display:flex; 
   align-items:center; 
@@ -131,9 +134,9 @@ onUnmounted(() => {
 }
 .viewport .slide { 
   max-width:auto; 
-  max-height:100%; 
+  max-height:100%;
   object-fit:contain; 
-  display:block; 
+  padding: 20px;
 }
 .nav { 
   background:transparent; 

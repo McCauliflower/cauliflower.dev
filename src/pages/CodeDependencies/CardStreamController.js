@@ -460,7 +460,7 @@ export class CardStreamController {
 
   populateCardLine() {
     this.cardLine.innerHTML = "";
-    const cardsCount = 7;
+    const cardsCount = 50;
     for (let i = 0; i < cardsCount; i++) {
       const cardWrapper = this.createCardWrapper(i);
       this.cardLine.appendChild(cardWrapper);

@@ -11,7 +11,7 @@
     <!-- <div class="speed-indicator">
       Speed: <input ref="speedValue" type="number" value="120"> px/s
     </div> -->
-    <input ref="speedValue" type="number" value="120">
+    <input style="display: none" ref="speedValue" type="number" value="120">
 
     <div class="container">
       <canvas ref="particleCanvas" id="particleCanvas"></canvas>
@@ -46,7 +46,6 @@
 
 <script setup lang="js">
 import { ref, onMounted, onBeforeUnmount } from 'vue';
-import { loadScript } from '../../utils/generalUtils';
 import { CardStreamController } from './CodeDependencies/CardStreamController.js';
 import { ParticleSystem } from './CodeDependencies/particleSystem.js';
 import { ParticleScanner } from './CodeDependencies/particleScanner.js';
@@ -120,8 +119,6 @@ const projects = [
   },
 ];
 onMounted(async () => {
-  await loadScript('https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js');
-  
   cardStreamController = new CardStreamController(
     cardStream.value,
     cardLine.value,
