@@ -8,8 +8,6 @@
 import { onMounted } from 'vue';
 
 onMounted(() => {
-  // Call waitForContainer when Home page mounts to reinitialize renderer
-  // This handles the case where we navigate away and back
   if (window.waitForContainer) {
     window.waitForContainer();
   }
