@@ -41,6 +41,12 @@ const onClick = (event) => {
 }
 
 const init = () => {
+	// Clear existing geometry from scene to prevent duplicates on reinit
+	scene.clear();
+	// Re-add camera group if it was cleared
+	cameraGroup.clear();
+	scene.add(cameraGroup);
+	
 	// initialize objects
 	const objMaterial = getMaterial('standard', 'rgb(255, 255, 255)');
 	const geoTypes = GEO_TYPES;
@@ -252,11 +258,11 @@ function waitForContainer() {
 		scene = init();
 	} else {
 		// Container doesn't exist yet, retry in 100ms
-		setTimeout(waitForContainer, 200);
+		setTimeout(waitForContainer, 100);
 	}
 }
 
-// Export waitForContainer to window so it can be called on re-mounts
+// Export to window so Home.vue can call it on remount
 window.waitForContainer = waitForContainer;
 
 // Start waiting for the container
