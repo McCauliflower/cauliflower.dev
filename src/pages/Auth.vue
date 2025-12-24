@@ -44,6 +44,8 @@
       <div class="profile-actions">
         <button @click="handleLogout" class="btn-logout">Log Out</button>
       </div>
+
+      <ContactForm />
     </section>
   </main>
 </template>
@@ -51,6 +53,7 @@
 <script setup>
 import { onMounted } from 'vue';
 import { useAuth0 } from '@auth0/auth0-vue';
+import ContactForm from '../components/ContactForm.vue';
 
 const { logout } = useAuth0();
 const { loginWithRedirect, user, isAuthenticated } = useAuth0();
@@ -64,6 +67,10 @@ const handleLogin = () => {
 const handleLogout = () => {
   logout({ logoutParams: { returnTo: window.location.origin } });
 };
+
+// update profile image
+// contact form submission
+// file uploads
 
 const formatDate = (dateString) => {
   if (!dateString) return 'N/A';

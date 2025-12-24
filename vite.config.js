@@ -18,5 +18,12 @@ export default defineConfig({
       usePolling: true,
       interval: 100,
     },
+    // Proxy API calls to Express backend during development
+    proxy: {
+      '/api': {
+        target: 'http://localhost:3001',
+        changeOrigin: true,
+      }
+    }
   },
 });
