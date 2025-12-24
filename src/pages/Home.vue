@@ -7,7 +7,7 @@
 <script setup>
 import { onMounted } from 'vue';
 
-onMounted(() => {
+onMounted(async () => {
   if (window.waitForContainer) {
     window.waitForContainer();
   }
