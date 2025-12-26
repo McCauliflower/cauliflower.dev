@@ -74,7 +74,7 @@ const init = () => {
 	lightBottom.position.z = 0;
 
 	// load the environment map
-	const path = '/assets/cubemap/';
+	const path = './assets/cubemap/';
 	const format = '.png';
 	const fileNames = ['nx', 'ny', 'nz', 'px', 'py', 'pz'];
 
@@ -86,8 +86,8 @@ const init = () => {
 	// manipulate materials
 	const textureLoader = new THREE.TextureLoader();
 
-	objMaterial.roughnessMap = textureLoader.load('/assets/textures/scratch.jpg');
-	objMaterial.bumpMap = textureLoader.load('/assets/textures/scratch.jpg');
+	objMaterial.roughnessMap = textureLoader.load('./assets/textures/scratch.jpg');
+	objMaterial.bumpMap = textureLoader.load('./assets/textures/scratch.jpg');
 	objMaterial.bumpScale = 0.01;
 	objMaterial.envMap = reflectionCube;
 

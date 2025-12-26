@@ -84,38 +84,38 @@ function changeDirection() {
 const projects = [
   {
     title: "Robot Builder",
-    image: "/assets/images/code_thumnails/robot-builder-thumb.png",
-    link: "/src/pages/sites/robot-builder/index.html",
+    image: './assets/images/code_thumnails/robot-builder-thumb.png',
+    link: "/sites/robot-builder/index.html",
   },
   {
     title: "Unicode Hieroglyphs",
-    image: "/assets/images/code_thumnails/unicode-thumb.png",
-    link: "/src/pages/sites/unicode-hieroglyphs/unicodeLoop.html",
+    image: './assets/images/code_thumnails/unicode-thumb.png',
+    link: "/sites/unicode-hieroglyphs/unicodeLoop.html",
   },
   {
     title: "Tree Fractal",
-    image: "/assets/images/code_thumnails/tree-fractal-thumb.png",
-    link: "/src/pages/sites/tree-fractal/index.html",
+    image: './assets/images/code_thumnails/tree-fractal-thumb.png',
+    link: "/sites/tree-fractal/index.html",
   },
   {
     title: "Snake",
-    image: "/assets/images/code_thumnails/snake-thumb.png",
-    link: "/src/pages/sites/snake/index.html",
+    image: './assets/images/code_thumnails/snake-thumb.png',
+    link: "/sites/snake/index.html",
   },
   {
     title: "Divz",
-    image: "/assets/images/code_thumnails/sun-shades-thumb.png",
-    link: "/src/pages/sites/divz/index.html",
+    image: './assets/images/code_thumnails/sun-shades-thumb.png',
+    link: "/sites/divz/index.html",
   },
   {
     title: "Thesis",
-    image: "/assets/images/code_thumnails/thesis-thumb.png",
-    link: "/src/pages/sites/thesis/index.html",
+    image: './assets/images/code_thumnails/thesis-thumb.png',
+    link: "/sites/thesis/index.html",
   },
   {
     title: "Ballpit",
-    image: "/assets/images/code_thumnails/ballpit-thumb.png",
-    link: "/src/pages/sites/ballpit/index.html",
+    image: './assets/images/code_thumnails/ballpit-thumb.png',
+    link: "/sites/ballpit/index.html",
   },
 ];
 onMounted(async () => {
