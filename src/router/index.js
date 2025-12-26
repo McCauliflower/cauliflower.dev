@@ -15,13 +15,13 @@ const routes = [
   { path: '/auth', component: Auth },
   // Project site routes - direct HTML file access
   { path: '/userinfo', component: () => {} },
-  { path: '/src/pages/sites/robot-builder/index.html', component: () => {} },
-  { path: '/src/pages/sites/unicode-hieroglyphs/unicodeLoop.html', component: () => {} },
-  { path: '/src/pages/sites/tree-fractal/index.html', component: () => {} },
-  { path: '/src/pages/sites/snake/index.html', component: () => {} },
-  { path: '/src/pages/sites/divz/index.html', component: () => {} },
-  { path: '/src/pages/sites/thesis/index.html', component: () => {} },
-  { path: '/src/pages/sites/ballpit/index.html', component: () => {} },
+  { path: '/sites/robot-builder/index.html', component: () => {} },
+  { path: '/sites/unicode-hieroglyphs/unicodeLoop.html', component: () => {} },
+  { path: '/sites/tree-fractal/index.html', component: () => {} },
+  { path: '/sites/snake/index.html', component: () => {} },
+  { path: '/sites/divz/index.html', component: () => {} },
+  { path: '/sites/thesis/index.html', component: () => {} },
+  { path: '/sites/ballpit/index.html', component: () => {} },
   { path: '/:pathMatch(.*)*', component: NotFound },
 ];
 
