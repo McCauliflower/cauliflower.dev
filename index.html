@@ -3,19 +3,16 @@
 <html lang="en">
     <head>
         <title>cauliflower.dev</title>
-        <!-- Load Three.js and dependencies with defer to ensure proper load order -->
-        <script type="module" defer src="./lib/three.js"></script>
-        <script type="module" defer src="./lib/perlin.js"></script>
-        <script type="module" defer src="./lib/OrbitControls.js"></script>
-        <script type="module" defer src="./scene.js"></script>
     </head>
     <body>
         <div id="app"></div>
         <!-- Vue/Vite entry -->
         <script type="module" src="./src/main.js"></script>
+        <!-- Load scene.js after Vue app is mounted and THREE is available -->
+        <script type="module" defer src="./scene.js"></script>
 
-        <link rel="stylesheet" href="./assets/reset.css">
-        <link rel="stylesheet" href="./styles.css">
+        <link rel="stylesheet" href="@/reset.css">
+        <link rel="stylesheet" href="@/styles.css">
     </body>
 
     <script type="module" src="./utils/head/inject-head.js"></script>

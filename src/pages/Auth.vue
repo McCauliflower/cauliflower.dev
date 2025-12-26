@@ -85,6 +85,7 @@ onMounted(() => {
 /* minimal spacing to account for fixed nav */
 .auth-shell { 
   padding-top: 60px; 
+  font-family: 'Iceberg', Arial, sans-serif;
 }
 
 .auth-shell .card{

@@ -50,6 +50,15 @@ import { CardStreamController } from './CodeDependencies/CardStreamController.js
 import { ParticleSystem } from './CodeDependencies/particleSystem.js';
 import { ParticleScanner } from './CodeDependencies/particleScanner.js';
 
+// Import images so Vite can resolve them correctly
+import robotBuilderThumb from '../../assets/images/code_thumnails/robot-builder-thumb.png';
+import unicodeThumb from '../../assets/images/code_thumnails/unicode-thumb.png';
+import treeFractalThumb from '../../assets/images/code_thumnails/tree-fractal-thumb.png';
+import snakeThumb from '../../assets/images/code_thumnails/snake-thumb.png';
+import sunShadesThumb from '../../assets/images/code_thumnails/sun-shades-thumb.png';
+import thesisThumb from '../../assets/images/code_thumnails/thesis-thumb.png';
+import ballpitThumb from '../../assets/images/code_thumnails/ballpit-thumb.png';
+
 // Template refs
 const speedValue = ref(null);
 const cardStream = ref(null);
@@ -84,37 +93,37 @@ function changeDirection() {
 const projects = [
   {
     title: "Robot Builder",
-    image: "/assets/images/code_thumnails/robot-builder-thumb.png",
+    image: robotBuilderThumb,
     link: "/src/pages/sites/robot-builder/index.html",
   },
   {
     title: "Unicode Hieroglyphs",
-    image: "/assets/images/code_thumnails/unicode-thumb.png",
+    image: unicodeThumb,
     link: "/src/pages/sites/unicode-hieroglyphs/unicodeLoop.html",
   },
   {
     title: "Tree Fractal",
-    image: "/assets/images/code_thumnails/tree-fractal-thumb.png",
+    image: treeFractalThumb,
     link: "/src/pages/sites/tree-fractal/index.html",
   },
   {
     title: "Snake",
-    image: "/assets/images/code_thumnails/snake-thumb.png",
+    image: snakeThumb,
     link: "/src/pages/sites/snake/index.html",
   },
   {
     title: "Divz",
-    image: "/assets/images/code_thumnails/sun-shades-thumb.png",
+    image: sunShadesThumb,
     link: "/src/pages/sites/divz/index.html",
   },
   {
     title: "Thesis",
-    image: "/assets/images/code_thumnails/thesis-thumb.png",
+    image: thesisThumb,
     link: "/src/pages/sites/thesis/index.html",
   },
   {
     title: "Ballpit",
-    image: "/assets/images/code_thumnails/ballpit-thumb.png",
+    image: ballpitThumb,
     link: "/src/pages/sites/ballpit/index.html",
   },
 ];

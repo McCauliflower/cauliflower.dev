@@ -31,36 +31,40 @@
 import AttractionCursor from "https://cdn.jsdelivr.net/npm/threejs-components@0.0.26/build/cursors/attraction1.min.js"
 import { ref, computed, onMounted, onUnmounted } from 'vue';
 import ElectricBorder from '@/components/ElectricBorder.vue';
-// Images list copied from original page
+
+// Use Vite's glob import to load all art images
+const artImages = import.meta.glob('../../assets/images/art_resized/*.png', { eager: true });
+
+// Convert glob results to image array
 const images = [
-  { src: '/assets/images/art_resized/Abraxas.png', alt: 'Abraxas' },
-  { src: '/assets/images/art_resized/Ajna Clairvoyance.png', alt: 'Ajna Clairvoyance' },
-  { src: '/assets/images/art_resized/Archetype of the Alien.png', alt: 'Archetype of the Alien' },
-  { src: '/assets/images/art_resized/benchwood.png', alt: 'benchwood' },
-  { src: '/assets/images/art_resized/Bio-Mechanical_Binary_Forest.png', alt: 'Bio-Mechanical Binary Forest' },
-  { src: '/assets/images/art_resized/blunted.png', alt: 'blunted' },
-  { src: '/assets/images/art_resized/Faced.png', alt: 'Faced' },
-  { src: '/assets/images/art_resized/hand.png', alt: 'hand' },
-  { src: '/assets/images/art_resized/Intergalactic Demi-God_.png', alt: 'Intergalactic Demi-God' },
-  { src: '/assets/images/art_resized/Jerry.png', alt: 'Jerry' },
-  { src: '/assets/images/art_resized/lucious.png', alt: 'lucious' },
-  { src: '/assets/images/art_resized/Lysergic_Illumination.png', alt: 'Lysergic Illumination' },
-  { src: '/assets/images/art_resized/Manifest_My_Destiny.png', alt: 'Manifest My Destiny' },
-  { src: '/assets/images/art_resized/Meditation Manifestation.png', alt: 'Meditation Manifestation' },
-  { src: '/assets/images/art_resized/Mystique_Moon.png', alt: 'Mystique Moon' },
-  { src: '/assets/images/art_resized/PeaceMealPainting.png', alt: 'PeaceMealPainting' },
-  { src: '/assets/images/art_resized/Planting the Seeds of Life.png', alt: 'Planting the Seeds of Life' },
-  { src: '/assets/images/art_resized/Popadoseyo.png', alt: 'Popadoseyo' },
-  { src: '/assets/images/art_resized/Psycho_Active_Astral_Graff.png', alt: 'Psycho Active Astral Graff' },
-  { src: '/assets/images/art_resized/Self_Portrait.png', alt: 'Self Portrait' },
-  { src: '/assets/images/art_resized/Sight_of_the Shaman.png', alt: 'Sight of the Shaman' },
-  { src: '/assets/images/art_resized/Sunshine_Daydream.png', alt: 'Sunshine Daydream' },
-  { src: '/assets/images/art_resized/Terence_McKenna.png', alt: 'Terence McKenna' },
-  { src: '/assets/images/art_resized/The_Eye_of_Horus.png', alt: 'The Eye of Horus' },
-  { src: '/assets/images/art_resized/The_Mad_Scientist.png', alt: 'The Mad Scientist' },
-  { src: '/assets/images/art_resized/Wyldstyle.png', alt: 'Wyldstyle' },
-  { src: '/assets/images/art_resized/z13_.png', alt: '13' }
-];
+  { src: artImages['../../assets/images/art_resized/Abraxas.png']?.default, alt: 'Abraxas' },
+  { src: artImages['../../assets/images/art_resized/Ajna Clairvoyance.png']?.default, alt: 'Ajna Clairvoyance' },
+  { src: artImages['../../assets/images/art_resized/Archetype of the Alien.png']?.default, alt: 'Archetype of the Alien' },
+  { src: artImages['../../assets/images/art_resized/benchwood.png']?.default, alt: 'benchwood' },
+  { src: artImages['../../assets/images/art_resized/Bio-Mechanical_Binary_Forest.png']?.default, alt: 'Bio-Mechanical Binary Forest' },
+  { src: artImages['../../assets/images/art_resized/blunted.png']?.default, alt: 'blunted' },
+  { src: artImages['../../assets/images/art_resized/Faced.png']?.default, alt: 'Faced' },
+  { src: artImages['../../assets/images/art_resized/hand.png']?.default, alt: 'hand' },
+  { src: artImages['../../assets/images/art_resized/Intergalactic Demi-God_.png']?.default, alt: 'Intergalactic Demi-God' },
+  { src: artImages['../../assets/images/art_resized/Jerry.png']?.default, alt: 'Jerry' },
+  { src: artImages['../../assets/images/art_resized/lucious.png']?.default, alt: 'lucious' },
+  { src: artImages['../../assets/images/art_resized/Lysergic_Illumination.png']?.default, alt: 'Lysergic Illumination' },
+  { src: artImages['../../assets/images/art_resized/Manifest_My_Destiny.png']?.default, alt: 'Manifest My Destiny' },
+  { src: artImages['../../assets/images/art_resized/Meditation Manifestation.png']?.default, alt: 'Meditation Manifestation' },
+  { src: artImages['../../assets/images/art_resized/Mystique_Moon.png']?.default, alt: 'Mystique Moon' },
+  { src: artImages['../../assets/images/art_resized/PeaceMealPainting.png']?.default, alt: 'PeaceMealPainting' },
+  { src: artImages['../../assets/images/art_resized/Planting the Seeds of Life.png']?.default, alt: 'Planting the Seeds of Life' },
+  { src: artImages['../../assets/images/art_resized/Popadoseyo.png']?.default, alt: 'Popadoseyo' },
+  { src: artImages['../../assets/images/art_resized/Psycho_Active_Astral_Graff.png']?.default, alt: 'Psycho Active Astral Graff' },
+  { src: artImages['../../assets/images/art_resized/Self_Portrait.png']?.default, alt: 'Self Portrait' },
+  { src: artImages['../../assets/images/art_resized/Sight_of_the Shaman.png']?.default, alt: 'Sight of the Shaman' },
+  { src: artImages['../../assets/images/art_resized/Sunshine_Daydream.png']?.default, alt: 'Sunshine Daydream' },
+  { src: artImages['../../assets/images/art_resized/Terence_McKenna.png']?.default, alt: 'Terence McKenna' },
+  { src: artImages['../../assets/images/art_resized/The_Eye_of_Horus.png']?.default, alt: 'The Eye of Horus' },
+  { src: artImages['../../assets/images/art_resized/The_Mad_Scientist.png']?.default, alt: 'The Mad Scientist' },
+  { src: artImages['../../assets/images/art_resized/Wyldstyle.png']?.default, alt: 'Wyldstyle' },
+  { src: artImages['../../assets/images/art_resized/z13_.png']?.default, alt: '13' }
+].filter(img => img.src); // Filter out any undefined images
 
 const index = ref(0);
 const autoplayMs = 4000;
