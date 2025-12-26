@@ -46,7 +46,7 @@ const images = [
   { src: './assets/images/art_resized/Jerry.png', alt: 'Jerry' },
   { src: './assets/images/art_resized/lucious.png', alt: 'lucious' },
   { src: './assets/images/art_resized/Lysergic_Illumination.png', alt: 'Lysergic Illumination' },
-  { src: './assets/images/art_resized/Manifest_My_Destiny.png', alt: 'Manifest My Destiny' },
+  { src: './assets/images/art_resized/Manifest_my_Destiny.png', alt: 'Manifest My Destiny' },
   { src: './assets/images/art_resized/Meditation Manifestation.png', alt: 'Meditation Manifestation' },
   { src: './assets/images/art_resized/Mystique_Moon.png', alt: 'Mystique Moon' },
   { src: './assets/images/art_resized/PeaceMealPainting.png', alt: 'PeaceMealPainting' },
