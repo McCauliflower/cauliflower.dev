@@ -82,12 +82,18 @@ const go = (i) => {
 };
 
 onMounted(() => {
-  const app = AttractionCursor(document.getElementById('canvas'), {
-    particles: {
-      attractionIntensity: 0.75,
-      size: 1.5,  
-    },
-  })
+  // Skip canvas animation on mobile devices or small windows
+  const isMobile = /Android|webOS|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i.test(navigator.userAgent) || window.innerWidth < 769;
+  
+  if (!isMobile) {
+    const app = AttractionCursor(document.getElementById('canvas'), {
+      particles: {
+        attractionIntensity: 0.75,
+        size: 1.5,  
+      },
+    })
+  }
+  
   timer = setInterval(() => next(), autoplayMs);
 })
 
@@ -145,13 +151,14 @@ onUnmounted(() => {
   font-size:24px; 
   cursor:pointer; 
   padding:8px 12px; 
-  color:white; 
+  color:white;
+  z-index:2
 }
 .dots { 
   display:flex; 
   justify-content:center; 
   gap:6px; 
-  margin-top:12px; 
+  margin-top:25px; 
 }
 .dot { 
   width:12px; 
@@ -164,4 +171,25 @@ onUnmounted(() => {
 .dot.active { 
   background:#666; 
 }
+
+/* Mobile background image */
+@media (max-width: 768px) {
+  #app {
+    background-image: url('./assets/images/gallery-background.jpg');
+    background-size: cover;
+    background-position: center;
+    background-attachment: fixed;
+  }
+  #canvas {
+    display: none;
+  }
+}
+
+/* Show canvas on desktop only */
+@media (min-width: 769px) {
+  #canvas {
+    display: block;
+  }
+}
+
 </style>

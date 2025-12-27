@@ -85,6 +85,12 @@
   width: 40vw !important; 
 }
 
+@media (max-width: 768px) {
+  .main-card, .main-container, .svg-container, .card-container {
+    width: 80vw !important;
+  }
+}
+
 /* Card container */
 .card-container {
   padding: 2px;

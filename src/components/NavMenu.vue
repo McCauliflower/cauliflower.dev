@@ -165,6 +165,16 @@ function go(path) {
   height: 0;
 }
 
+@media (max-width: 768px) {
+  #cssmenu ul li {
+    width: 85px;
+    min-width: auto;
+  }
+  #login ul li {
+    width: 85px;
+  }
+}
+
 #login {
   font-family: 'Iceberg', Arial, sans-serif;
   position: absolute;
