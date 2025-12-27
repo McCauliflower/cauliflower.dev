@@ -46,27 +46,21 @@ export class CardStreamController {
 
   setupEventListeners() {
     // Store bound methods for proper cleanup
-    this.boundMouseDown = (e) => this.startDrag(e);
-    this.boundMouseMove = (e) => this.onDrag(e);
-    this.boundMouseUp = () => this.endDrag();
-    this.boundTouchStart = (e) => this.startDrag(e.touches[0]);
-    this.boundTouchMove = (e) => this.onDrag(e.touches[0]);
-    this.boundTouchEnd = () => this.endDrag();
+    this.boundPointerDown = (e) => this.startDrag(e);
+    this.boundPointerMove = (e) => this.onDrag(e);
+    this.boundPointerUp = () => this.endDrag();
     this.boundWheel = (e) => this.onWheel(e);
     this.boundSelectStart = (e) => e.preventDefault();
     this.boundDragStart = (e) => e.preventDefault();
 
-    this.cardLine.addEventListener("mousedown", this.boundMouseDown);
-    document.addEventListener("mousemove", this.boundMouseMove);
-    document.addEventListener("mouseup", this.boundMouseUp);
-
-    this.cardLine.addEventListener("touchstart", this.boundTouchStart, {
+    // Use pointer events for both touch and mouse (modern standard)
+    this.cardLine.addEventListener("pointerdown", this.boundPointerDown, {
       passive: false,
     });
-    document.addEventListener("touchmove", this.boundTouchMove, {
+    document.addEventListener("pointermove", this.boundPointerMove, {
       passive: false,
     });
-    document.addEventListener("touchend", this.boundTouchEnd, {
+    document.addEventListener("pointerup", this.boundPointerUp, {
       passive: false,
     });
 
@@ -501,15 +495,10 @@ export class CardStreamController {
       window.removeEventListener("resize", this.resizeListener);
     }
 
-    // Remove mouse events
-    this.cardLine.removeEventListener("mousedown", this.boundMouseDown);
-    document.removeEventListener("mousemove", this.boundMouseMove);
-    document.removeEventListener("mouseup", this.boundMouseUp);
-
-    // Remove touch events
-    this.cardLine.removeEventListener("touchstart", this.boundTouchStart);
-    document.removeEventListener("touchmove", this.boundTouchMove);
-    document.removeEventListener("touchend", this.boundTouchEnd);
+    // Remove pointer events
+    this.cardLine.removeEventListener("pointerdown", this.boundPointerDown);
+    document.removeEventListener("pointermove", this.boundPointerMove);
+    document.removeEventListener("pointerup", this.boundPointerUp);
 
     // Remove other events
     this.cardLine.removeEventListener("wheel", this.boundWheel);
