@@ -45,23 +45,34 @@ export class CardStreamController {
   }
 
   setupEventListeners() {
-    this.cardLine.addEventListener("mousedown", (e) => this.startDrag(e));
-    document.addEventListener("mousemove", (e) => this.onDrag(e));
-    document.addEventListener("mouseup", () => this.endDrag());
+    // Store bound methods for proper cleanup
+    this.boundMouseDown = (e) => this.startDrag(e);
+    this.boundMouseMove = (e) => this.onDrag(e);
+    this.boundMouseUp = () => this.endDrag();
+    this.boundTouchStart = (e) => this.startDrag(e.touches[0]);
+    this.boundTouchMove = (e) => this.onDrag(e.touches[0]);
+    this.boundTouchEnd = () => this.endDrag();
+    this.boundWheel = (e) => this.onWheel(e);
+    this.boundSelectStart = (e) => e.preventDefault();
+    this.boundDragStart = (e) => e.preventDefault();
 
-    this.cardLine.addEventListener(
-      "touchstart",
-      (e) => this.startDrag(e.touches[0]),
-      { passive: false }
-    );
-    document.addEventListener("touchmove", (e) => this.onDrag(e.touches[0]), {
+    this.cardLine.addEventListener("mousedown", this.boundMouseDown);
+    document.addEventListener("mousemove", this.boundMouseMove);
+    document.addEventListener("mouseup", this.boundMouseUp);
+
+    this.cardLine.addEventListener("touchstart", this.boundTouchStart, {
       passive: false,
     });
-    document.addEventListener("touchend", () => this.endDrag());
+    document.addEventListener("touchmove", this.boundTouchMove, {
+      passive: false,
+    });
+    document.addEventListener("touchend", this.boundTouchEnd, {
+      passive: false,
+    });
 
-    this.cardLine.addEventListener("wheel", (e) => this.onWheel(e));
-    this.cardLine.addEventListener("selectstart", (e) => e.preventDefault());
-    this.cardLine.addEventListener("dragstart", (e) => e.preventDefault());
+    this.cardLine.addEventListener("wheel", this.boundWheel);
+    this.cardLine.addEventListener("selectstart", this.boundSelectStart);
+    this.cardLine.addEventListener("dragstart", this.boundDragStart);
 
     this.resizeListener = () => this.calculateDimensions();
     window.addEventListener("resize", this.resizeListener);
@@ -489,9 +500,20 @@ export class CardStreamController {
     if (this.resizeListener) {
       window.removeEventListener("resize", this.resizeListener);
     }
-    document.removeEventListener("mousemove", (e) => this.onDrag(e));
-    document.removeEventListener("mouseup", () => this.endDrag());
-    document.removeEventListener("touchmove", (e) => this.onDrag(e.touches[0]));
-    document.removeEventListener("touchend", () => this.endDrag());
+
+    // Remove mouse events
+    this.cardLine.removeEventListener("mousedown", this.boundMouseDown);
+    document.removeEventListener("mousemove", this.boundMouseMove);
+    document.removeEventListener("mouseup", this.boundMouseUp);
+
+    // Remove touch events
+    this.cardLine.removeEventListener("touchstart", this.boundTouchStart);
+    document.removeEventListener("touchmove", this.boundTouchMove);
+    document.removeEventListener("touchend", this.boundTouchEnd);
+
+    // Remove other events
+    this.cardLine.removeEventListener("wheel", this.boundWheel);
+    this.cardLine.removeEventListener("selectstart", this.boundSelectStart);
+    this.cardLine.removeEventListener("dragstart", this.boundDragStart);
   }
 }
