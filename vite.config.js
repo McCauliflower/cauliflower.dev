@@ -11,6 +11,14 @@ export default defineConfig({
     '@': fileURLToPath(new URL('./src', import.meta.url)) // Alias for src folder
     },
   },
+  build: {
+    rollupOptions: {
+      input: fileURLToPath(new URL('./index.html', import.meta.url)),
+    },
+    // Optimize chunk size warnings
+    chunkSizeWarningLimit: 1000,
+    assetsInlineLimit: 0, // Prevent large images from being inlined
+  },
   server: {
     hmr: true,
     port: 5173,
