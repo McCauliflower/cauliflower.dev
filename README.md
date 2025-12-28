@@ -1,1 +1,1 @@
-: 👽 # cauliflower.dev 👽
+👽 cauliflower.dev 👽
