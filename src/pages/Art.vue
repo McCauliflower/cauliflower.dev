@@ -1,7 +1,7 @@
 <template>
   <div id="app" :class="{ 'background-applied': !isMobile.value }">
     <canvas id="canvas" :class="{ 'mobile': isMobile.value }"></canvas>
-    <div class="container">
+    <div class="art-container">
       <div class="wrapper">
           <div class="carousel">
             <button class="nav prev" @click="prev" aria-label="Previous">◀</button>
@@ -123,8 +123,8 @@ onUnmounted(() => {
 }
 
 /* simple slider styles */
-.container { 
-  padding-top: 20vh; 
+.art-container { 
+  padding-top: 10vh; 
 }
 .carousel { 
   display:flex; 
@@ -157,10 +157,15 @@ onUnmounted(() => {
   z-index:2
 }
 .dots { 
-  display:flex; 
-  justify-content:center; 
-  gap:6px; 
-  margin-top:25px; 
+  display: flex;
+  justify-content: center;
+  gap: 6px;
+  margin-top: 0px;
+  position: absolute;
+  width: 50vw;
+  margin-left: calc(25vw);
+  padding-top: 25px;
+  box-sizing: border-box;
 }
 .dot { 
   width:12px; 

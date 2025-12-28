@@ -34,16 +34,8 @@
 
     <div class="card-container" ref="cardContainer">
       <div class="inner-container">
-        <div class="border-outer">
           <div class="main-card"></div>
-        </div>
-        <div class="glow-layer-1"></div>
-        <div class="glow-layer-2"></div>
       </div>
-
-      <div class="overlay-1"></div>
-      <div class="overlay-2"></div>
-      <div class="background-glow"></div>
 
       <div class="content-container" ref="contentContainer">
         <slot />
@@ -82,8 +74,10 @@
 
 .main-card, .main-container, .svg-container, .card-container {
   height: min(600px, 70vh) !important;
-  width: 40vw !important; 
 }
+ .main-container{
+  width: 55vw !important;
+ }
 
 @media (max-width: 768px) {
   .main-card, .main-container, .svg-container, .card-container {
@@ -115,118 +109,13 @@
   z-index: 2;
 }
 
-/* Border layers */
-.border-outer {
-  border: 2px solid rgba(221, 132, 72, 0.2);
-  border-radius: 24px;
-  padding-right: 4px;
-  padding-bottom: 4px;
-}
-
 .main-card {
-  width: 350px;
-  height: 500px;
+  width: 55vw;
   border-radius: 24px;
-  border: 2px solid var(--electric-border-color);
+  border: 4px solid var(--electric-border-color);
   margin-top: -4px;
   margin-left: -4px;
   filter: url(#turbulent-displace);
-}
-
-/* Glow effects */
-.glow-layer-1 {
-  border: 8px solid rgba(221, 132, 72, 0.8);
-  border-radius: 24px;
-  width: 100%;
-  height: 100%;
-  position: absolute;
-  top: 0;
-  left: 0;
-  right: 0;
-  bottom: 0;
-  filter: blur(1px);
-  opacity: .2 !important;;
-}
-
-.glow-layer-2 {
-  border: 8px solid var(--electric-light-color);
-  border-radius: 24px;
-  width: 100%;
-  height: 100%;
-  position: absolute;
-  top: 0;
-  left: 0;
-  right: 0;
-  bottom: 0;
-  filter: blur(4px);
-  opacity: .2 !important;;
-}
-
-/* Overlay effects */
-.overlay-1 {
-  position: absolute;
-  width: 100%;
-  height: 100%;
-  top: 0;
-  left: 0;
-  right: 0;
-  bottom: 0;
-  border-radius: 24px;
-  opacity: 1;
-  mix-blend-mode: overlay;
-  transform: scale(1.1);
-  filter: blur(16px);
-  background: linear-gradient(
-    -30deg,
-    white,
-    transparent 30%,
-    transparent 70%,
-    white
-  );
-}
-
-.overlay-2 {
-  position: absolute;
-  width: 100%;
-  height: 100%;
-  top: 0;
-  left: 0;
-  right: 0;
-  bottom: 0;
-  border-radius: 24px;
-  opacity: 0.5;
-  mix-blend-mode: overlay;
-  transform: scale(1.1);
-  filter: blur(16px);
-  background: linear-gradient(
-    -30deg,
-    white,
-    transparent 30%,
-    transparent 70%,
-    white
-  );
-}
-
-/* Background glow */
-.background-glow {
-  position: absolute;
-  width: 100%;
-  height: 100%;
-  top: 0;
-  left: 0;
-  right: 0;
-  bottom: 0;
-  border-radius: 24px;
-  filter: blur(32px);
-  transform: scale(1.1);
-  opacity: 0.3;
-  z-index: -1;
-  background: linear-gradient(
-    -30deg,
-    var(--electric-light-color),
-    transparent,
-    var(--electric-border-color)
-  );
 }
 
 /* Content container */
