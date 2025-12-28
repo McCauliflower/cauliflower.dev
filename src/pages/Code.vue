@@ -12,7 +12,9 @@
       Speed: <input ref="speedValue" type="number" value="120"> px/s
     </div> -->
     <input style="display: none" ref="speedValue" type="number" value="120">
-
+    <div :class="{ 'mobile-notice': isMobile.value }">
+      <p>&#x26A0; Notice: These code snippets may not function properly on mobile devices. &#x26A0;</p>
+    </div>
     <div class="container">
       <canvas ref="particleCanvas" id="particleCanvas"></canvas>
       <canvas ref="scannerCanvas" id="scannerCanvas"></canvas>
@@ -42,6 +44,21 @@
   box-sizing: border-box;
 }
 
+.mobile-notice{
+  position: fixed;
+  margin: 0 25vw;
+  top: 25vh;
+  width: 50vw;;
+  padding: 20px;
+  text-align: center;
+  background: lightgrey;
+  color: orange;
+  font-size: 14px;
+  z-index: 3;
+  border: 3px solid orange;
+  opacity: .8;
+}
+
 </style>
 
 <script setup lang="js">
@@ -56,7 +73,7 @@ const cardStream = ref(null);
 const cardLine = ref(null);
 const particleCanvas = ref(null);
 const scannerCanvas = ref(null);
-
+const isMobile = ref(false);
 // Controller instances
 let cardStreamController = null;
 let particleSystem = null;
@@ -119,6 +136,8 @@ const projects = [
   },
 ];
 onMounted(async () => {
+  isMobile.value = /Android|webOS|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i.test(navigator.userAgent);
+
   cardStreamController = new CardStreamController(
     cardStream.value,
     cardLine.value,
