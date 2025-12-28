@@ -83,21 +83,16 @@ const go = (i) => {
 
 onMounted(() => {
   // // Skip canvas animation on mobile devices or small windows
-  // const isMobile = /Android|webOS|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i.test(navigator.userAgent) || window.innerWidth < 769;
-  const app = AttractionCursor(document.getElementById('canvas'), {
-    particles: {
-      attractionIntensity: 0.75,
-      size: 1.5,  
-    },
-  })
-  // if (!isMobile) {
-  //   const app = AttractionCursor(document.getElementById('canvas'), {
-  //     particles: {
-  //       attractionIntensity: 0.75,
-  //       size: 1.5,  
-  //     },
-  //   })
-  // }
+  const isMobile = /Android|webOS|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i.test(navigator.userAgent) || window.innerWidth < 769;
+
+  if (!isMobile) {
+    const app = AttractionCursor(document.getElementById('canvas'), {
+      particles: {
+        attractionIntensity: 0.75,
+        size: 1.5,  
+      },
+    })
+  }
   
   timer = setInterval(() => next(), autoplayMs);
 })
@@ -179,7 +174,7 @@ onUnmounted(() => {
 }
 
 /* Mobile background image */
-/* @media (max-width: 768px) {
+@media (max-width: 768px) {
   #app {
     background-image: url('/assets/images/gallery-background.jpg');
     background-size: cover;
@@ -189,13 +184,13 @@ onUnmounted(() => {
   #canvas {
     display: none;
   }
-} */
+}
 
 /* Show canvas on desktop only */
-/* @media (min-width: 769px) {
+@media (min-width: 769px) {
   #canvas {
     display: block;
   }
-} */
+}
 
 </style>
