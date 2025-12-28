@@ -1,6 +1,6 @@
 <template>
-  <div id="app">
-    <canvas id="canvas"></canvas>
+  <div id="app" :class="{ 'background-applied': !isMobile.value }">
+    <canvas id="canvas" :class="{ 'mobile': isMobile.value }"></canvas>
     <div class="container">
       <div class="wrapper">
           <div class="carousel">
@@ -63,6 +63,7 @@ const images = [
   { src: './assets/images/art_resized/z13_.png', alt: '13' }
 ];
 
+const isMobile = ref(false);
 const index = ref(0);
 const autoplayMs = 4000;
 let timer = null;
@@ -83,9 +84,9 @@ const go = (i) => {
 
 onMounted(() => {
   // // Skip canvas animation on mobile devices or small windows
-  const isMobile = /Android|webOS|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i.test(navigator.userAgent) || window.innerWidth < 769;
+  isMobile.value = /Android|webOS|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i.test(navigator.userAgent);
 
-  if (!isMobile) {
+  if (!isMobile.value) {
     const app = AttractionCursor(document.getElementById('canvas'), {
       particles: {
         attractionIntensity: 0.75,
@@ -175,20 +176,20 @@ onUnmounted(() => {
 
 /* Mobile background image */
 @media (max-width: 768px) {
-  #app {
+  .background-applied {
     background-image: url('/assets/images/gallery-background.jpg');
     background-size: cover;
     background-position: center;
     background-attachment: fixed;
   }
-  #canvas {
+  .mobile {
     display: none;
   }
 }
 
 /* Show canvas on desktop only */
 @media (min-width: 769px) {
-  #canvas {
+  .mobile {
     display: block;
   }
 }
