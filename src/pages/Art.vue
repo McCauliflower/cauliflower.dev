@@ -124,7 +124,7 @@ onUnmounted(() => {
 
 /* simple slider styles */
 .art-container { 
-  padding-top: 10vh; 
+  padding-top: 13vh; 
 }
 .carousel { 
   display:flex; 
