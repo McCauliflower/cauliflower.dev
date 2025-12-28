@@ -3,6 +3,11 @@ import '../lib/three.js';
 import '../lib/perlin.js';
 import '../lib/OrbitControls.js';
 
+// Suppress Three.js multiple instance warning (AttractionCursor from CDN includes its own Three.js)
+if (typeof THREE !== 'undefined') {
+  THREE.REVISION = undefined;
+}
+
 import { createApp } from 'vue';
 import App from './App.vue';
 import router from './router';
