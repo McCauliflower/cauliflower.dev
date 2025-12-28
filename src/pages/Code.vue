@@ -136,7 +136,7 @@ const projects = [
   },
 ];
 onMounted(async () => {
-  isMobile.value = /Android|webOS|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i.test(navigator.userAgent);
+  isMobile.value = /Android|webOS|iPhone|iPod|BlackBerry|IEMobile|Opera Mini/i.test(navigator.userAgent);
 
   cardStreamController = new CardStreamController(
     cardStream.value,
