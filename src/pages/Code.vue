@@ -12,7 +12,7 @@
       Speed: <input ref="speedValue" type="number" value="120"> px/s
     </div> -->
     <input style="display: none" ref="speedValue" type="number" value="120">
-    <div :class="{ 'mobile-notice': isMobile.value }">
+    <div class="mobile-notice" v-if="isMobile.value">
       <p>&#x26A0; Notice: These code snippets may not function properly on mobile devices. &#x26A0;</p>
     </div>
     <div class="container">
@@ -47,7 +47,7 @@
 .mobile-notice{
   position: fixed;
   margin: 0 25vw;
-  top: 25vh;
+  top: 28vh;
   width: 50vw;;
   padding: 20px;
   text-align: center;
@@ -56,7 +56,7 @@
   font-size: 14px;
   z-index: 3;
   border: 3px solid orange;
-  opacity: .8;
+  opacity: .6;
 }
 
 </style>
@@ -136,7 +136,7 @@ const projects = [
   },
 ];
 onMounted(async () => {
-  isMobile.value = /Android|webOS|iPhone|iPod|BlackBerry|IEMobile|Opera Mini/i.test(navigator.userAgent);
+  isMobile.value = /Android|webOS|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i.test(navigator.userAgent);
 
   cardStreamController = new CardStreamController(
     cardStream.value,
