@@ -9,9 +9,8 @@ export const getHeadTags = () => [
   { tag: 'meta', attrs: { name: 'keywords', content: 'art, code, creative coding, developer, portfolio, generative art, web development, three.js, personal website' } },
   { tag: 'meta', attrs: { name: 'theme-color', content: '#222' } },
   { tag: 'link', attrs: { rel: 'canonical', href: 'https://cauliflower.dev/' } },
-  { tag: 'link', attrs: { rel: 'stylesheet', href: '@/styles.css' } },
+  { tag: 'link', attrs: { rel: 'stylesheet', href: '/src/styles.css' } },
   { tag: 'link', attrs: { rel: 'icon', type: 'image/png', href: './assets/images/Cauliflower.png' } },
-  { tag: 'link', attrs: { rel: 'preload', href: './assets/fonts/Iceberg-Regular.ttf', as: 'font', type: 'font/ttf', crossorigin: '' } },
   // Open Graph / Facebook
   { tag: 'meta', attrs: { property: 'og:type', content: 'website' } },
   { tag: 'meta', attrs: { property: 'og:url', content: 'https://cauliflower.dev/' } },

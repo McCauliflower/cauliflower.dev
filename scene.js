@@ -119,6 +119,13 @@ const init = () => {
 	// renderer
 	const renderer = new THREE.WebGLRenderer();
 	const canvas = document.querySelector('#three-container');
+	
+	// Remove any existing canvas to prevent duplicates when re-initializing
+	const existingCanvas = canvas.querySelector('canvas');
+	if (existingCanvas) {
+		existingCanvas.remove();
+	}
+	
 	renderer.setSize(window.innerWidth, window.innerHeight - 50);
 	// Add the event listener to the renderer's canvas
 	renderer.domElement.addEventListener('click', onClick, false);
