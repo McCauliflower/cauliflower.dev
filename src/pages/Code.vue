@@ -46,9 +46,11 @@
 
 .mobile-notice{
   position: fixed;
-  margin: 0 25vw;
   top: 28vh;
-  width: 50vw;;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 90%;
+  max-width: 50vw;
   padding: 20px;
   text-align: center;
   background: lightgrey;
@@ -57,6 +59,7 @@
   z-index: 3;
   border: 3px solid orange;
   opacity: .6;
+  box-sizing: border-box;
 }
 
 </style>

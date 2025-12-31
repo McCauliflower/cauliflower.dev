@@ -5,11 +5,14 @@
       <div class="wrapper">
           <div class="carousel">
             <button class="nav prev" @click="prev" aria-label="Previous">◀</button>
-              <Electric-Border>
+              <Electric-Border v-if="isMobile.value">
                 <div class="viewport">
                   <img :src="current.src" :alt="current.alt" class="slide" draggable="false" />
                 </div>
               </Electric-Border>
+              <div v-else class="viewport">
+                <img :src="current.src" :alt="current.alt" class="slide" draggable="false" />
+              </div>
             <button class="nav next" @click="next" aria-label="Next">▶</button>
           </div>
           <div class="dots">
@@ -139,7 +142,8 @@ onUnmounted(() => {
   align-items:center; 
   justify-content:center; 
   overflow:hidden; 
-  background:transparent; 
+  background:transparent;
+  z-index: 1;
 }
 .viewport .slide { 
   max-width:auto; 
