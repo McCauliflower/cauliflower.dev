@@ -56,10 +56,11 @@
   background: lightgrey;
   color: orange;
   font-size: 14px;
-  z-index: 3;
+  z-index: 200;
   border: 3px solid orange;
   opacity: .6;
   box-sizing: border-box;
+  pointer-events: auto;
 }
 
 </style>
@@ -140,6 +141,8 @@ const projects = [
 ];
 onMounted(async () => {
   isMobile.value = /Android|webOS|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i.test(navigator.userAgent);
+  console.log('Mobile detected:', isMobile.value);
+  console.log('User agent:', navigator.userAgent);
 
   cardStreamController = new CardStreamController(
     cardStream.value,
