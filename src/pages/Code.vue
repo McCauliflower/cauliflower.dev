@@ -68,8 +68,8 @@
 <script setup lang="js">
 import { ref, onMounted, onBeforeUnmount } from 'vue';
 import { CardStreamController } from './CodeDependencies/CardStreamController.js';
-import { ParticleSystem } from './CodeDependencies/particleSystem.js';
-import { ParticleScanner } from './CodeDependencies/particleScanner.js';
+import { ParticleSystem } from './CodeDependencies/ParticleSystem.js';
+import { ParticleScanner } from './CodeDependencies/ParticleScanner.js';
 
 // Template refs
 const speedValue = ref(null);

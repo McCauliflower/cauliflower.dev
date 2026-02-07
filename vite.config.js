@@ -20,6 +20,7 @@ export default defineConfig({
     assetsInlineLimit: 0, // Prevent large images from being inlined
   },
   server: {
+    listen: '0.0.0.0',
     hmr: true,
     port: 5173,
     // needed for WSL2 file change detection
