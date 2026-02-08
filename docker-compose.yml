@@ -1,8 +1,11 @@
-version: '3.8'
-
 services:
   cauliflower-app:
-    build: .
+    image: cauliflower
+    build:
+      context: .
+      dockerfile: Dockerfile
+      args:
+        SOCKET_FIREWALL_KEY: ${SOCKET_FIREWALL_KEY}
     env_file:
       - .env
     ports:
